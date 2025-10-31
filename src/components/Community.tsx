@@ -5,7 +5,7 @@ const socialLinks = [
   {
     name: "YouTube",
     icon: Youtube,
-    url: "https://www.youtube.com/@overmepasseia",
+    url: "https://youtube.com/@overmepasseia1",
     label: "@overmepasseia"
   },
   {
