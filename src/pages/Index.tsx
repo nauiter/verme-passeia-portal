@@ -3,6 +3,7 @@ import Quotes from "@/components/Quotes";
 import About from "@/components/About";
 import Download from "@/components/Download";
 import Community from "@/components/Community";
+import FooterNauiterMaster from "@/components/shared/FooterNauiterMaster";
 
 const Index = () => {
   return (
@@ -12,6 +13,7 @@ const Index = () => {
       <About />
       <Download />
       <Community />
+      <FooterNauiterMaster />
     </main>
   );
 };
