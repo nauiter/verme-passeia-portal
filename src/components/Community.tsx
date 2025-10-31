@@ -1,4 +1,4 @@
-import { Youtube, Twitter, Linkedin, ExternalLink } from "lucide-react";
+import { Youtube, Twitter, Linkedin, ExternalLink, Instagram, Facebook } from "lucide-react";
 import brutalistRoad from "@/assets/brutalist-road.png";
 
 const socialLinks = [
@@ -13,6 +13,18 @@ const socialLinks = [
     icon: Twitter,
     url: "https://x.com/overmepasseia",
     label: "@overmepasseia"
+  },
+  {
+    name: "Instagram",
+    icon: Instagram,
+    url: "https://www.instagram.com/overmepasseia",
+    label: "@overmepasseia"
+  },
+  {
+    name: "Facebook",
+    icon: Facebook,
+    url: "https://www.facebook.com/profile.php?id=61581838834536",
+    label: "O Verme Passeia"
   },
   {
     name: "LinkedIn Newsletter",
@@ -50,7 +62,7 @@ const Community = () => {
           </div>
           
           {/* Social Links Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {socialLinks.map((link) => {
               const Icon = link.icon;
               return (
