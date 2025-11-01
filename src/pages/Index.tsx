@@ -4,10 +4,12 @@ import About from "@/components/About";
 import Download from "@/components/Download";
 import Community from "@/components/Community";
 import FooterNauiterMaster from "@/components/shared/FooterNauiterMaster";
+import BackgroundMusic from "@/components/BackgroundMusic";
 
 const Index = () => {
   return (
     <main className="min-h-screen">
+      <BackgroundMusic />
       <Hero />
       <Quotes />
       <About />
