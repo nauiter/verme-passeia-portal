@@ -17,24 +17,34 @@ const BackgroundMusic = () => {
     // Set initial volume
     audio.volume = volume / 100;
 
-    // Play after first user interaction
-    const handleInteraction = async () => {
-      if (!hasInteractedRef.current) {
-        hasInteractedRef.current = true;
-        try {
-          await audio.play();
-          console.log("Audio started playing");
-        } catch (error) {
-          console.error("Playback failed:", error);
-        }
+    // Try to autoplay immediately
+    const tryAutoplay = async () => {
+      try {
+        await audio.play();
+        console.log("Audio autoplay started");
+      } catch (error) {
+        console.log("Autoplay blocked by browser, waiting for user interaction");
+        // Fallback: play on first user interaction if autoplay is blocked
+        const handleInteraction = async () => {
+          if (!hasInteractedRef.current) {
+            hasInteractedRef.current = true;
+            try {
+              await audio.play();
+              console.log("Audio started after user interaction");
+            } catch (err) {
+              console.error("Playback failed:", err);
+            }
+          }
+        };
+        
+        const events = ['click', 'keydown', 'touchstart', 'scroll'];
+        events.forEach(event => {
+          document.addEventListener(event, handleInteraction, { once: true });
+        });
       }
     };
 
-    // Listen for any user interaction
-    const events = ['click', 'keydown', 'touchstart', 'scroll'];
-    events.forEach(event => {
-      document.addEventListener(event, handleInteraction, { once: true });
-    });
+    tryAutoplay();
 
     return () => {
       if (audio) {
