@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import crackedBuilding from "@/assets/cracked-building.png";
+import crackedBuilding from "@/assets/cracked-building.webp";
 
 const quotes = [
   "Há beleza no que não quer ser visto.",

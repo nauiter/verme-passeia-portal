@@ -1,5 +1,5 @@
 import { Youtube, Twitter, Linkedin, ExternalLink, Instagram, Facebook } from "lucide-react";
-import brutalistRoad from "@/assets/brutalist-road.png";
+import brutalistRoad from "@/assets/brutalist-road.webp";
 
 const socialLinks = [
   {

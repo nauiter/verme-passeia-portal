@@ -1,4 +1,4 @@
-import darkTower from "@/assets/dark-tower.jpeg";
+import darkTower from "@/assets/dark-tower.webp";
 
 const About = () => {
   return (
@@ -35,6 +35,8 @@ const About = () => {
               <img 
                 src={darkTower} 
                 alt="Torre solitária em névoa brutalista" 
+                width="600"
+                height="327"
                 className="w-full h-auto object-cover transition-transform duration-700 hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent"></div>

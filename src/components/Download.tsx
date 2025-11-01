@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Download as DownloadIcon } from "lucide-react";
-import abandonedBlocks from "@/assets/abandoned-blocks.png";
+import abandonedBlocks from "@/assets/abandoned-blocks.webp";
 
 const Download = () => {
   return (

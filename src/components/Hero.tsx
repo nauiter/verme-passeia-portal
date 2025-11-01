@@ -1,4 +1,4 @@
-import spiralStaircase from "@/assets/spiral-staircase.png";
+import spiralStaircase from "@/assets/spiral-staircase.webp";
 
 const Hero = () => {
   return (
