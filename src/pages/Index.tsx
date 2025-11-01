@@ -1,20 +1,25 @@
+import { lazy, Suspense } from "react";
 import Hero from "@/components/Hero";
-import Quotes from "@/components/Quotes";
-import About from "@/components/About";
-import Download from "@/components/Download";
-import Community from "@/components/Community";
 import FooterNauiterMaster from "@/components/shared/FooterNauiterMaster";
 import BackgroundMusic from "@/components/BackgroundMusic";
+
+// Lazy load components below the fold
+const Quotes = lazy(() => import("@/components/Quotes"));
+const About = lazy(() => import("@/components/About"));
+const Download = lazy(() => import("@/components/Download"));
+const Community = lazy(() => import("@/components/Community"));
 
 const Index = () => {
   return (
     <main className="min-h-screen">
       <BackgroundMusic />
       <Hero />
-      <Quotes />
-      <About />
-      <Download />
-      <Community />
+      <Suspense fallback={<div className="min-h-screen" />}>
+        <Quotes />
+        <About />
+        <Download />
+        <Community />
+      </Suspense>
       <FooterNauiterMaster />
     </main>
   );
