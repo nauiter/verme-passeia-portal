@@ -6,10 +6,9 @@ import { Slider } from "@/components/ui/slider";
 const BackgroundMusic = () => {
   const [isMuted, setIsMuted] = useState(false);
   const [volume, setVolume] = useState(70);
-  const [isReady, setIsReady] = useState(false);
-  const [hasInteracted, setHasInteracted] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
   const fadeIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const hasInteractedRef = useRef(false);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -17,22 +16,22 @@ const BackgroundMusic = () => {
 
     // Set initial volume
     audio.volume = volume / 100;
-    setIsReady(true);
 
     // Play after first user interaction
     const handleInteraction = async () => {
-      if (!hasInteracted) {
-        setHasInteracted(true);
+      if (!hasInteractedRef.current) {
+        hasInteractedRef.current = true;
         try {
           await audio.play();
+          console.log("Audio started playing");
         } catch (error) {
-          console.log("Playback failed:", error);
+          console.error("Playback failed:", error);
         }
       }
     };
 
     // Listen for any user interaction
-    const events = ['click', 'keydown', 'touchstart'];
+    const events = ['click', 'keydown', 'touchstart', 'scroll'];
     events.forEach(event => {
       document.addEventListener(event, handleInteraction, { once: true });
     });
@@ -44,11 +43,8 @@ const BackgroundMusic = () => {
       if (fadeIntervalRef.current) {
         clearInterval(fadeIntervalRef.current);
       }
-      events.forEach(event => {
-        document.removeEventListener(event, handleInteraction);
-      });
     };
-  }, [hasInteracted, volume]);
+  }, []);
 
   const toggleMute = async () => {
     const audio = audioRef.current;
@@ -115,8 +111,6 @@ const BackgroundMusic = () => {
       audio.volume = newVolume / 100;
     }
   };
-
-  if (!isReady) return null;
 
   return (
     <>
