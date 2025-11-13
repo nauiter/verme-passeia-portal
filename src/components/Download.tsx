@@ -32,13 +32,13 @@ const Download = () => {
           
           {/* CTA Button */}
           <div className="pt-8">
-            <Button 
-              size="lg"
-              className="font-sans text-base md:text-lg tracking-wider uppercase px-12 py-6 bg-accent text-accent-foreground hover:bg-accent/90 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
-            >
-              <DownloadIcon className="mr-3 h-5 w-5" />
-              Baixar Gratuitamente
-            </Button>
+          <Button 
+            size="lg"
+            className="font-sans text-base md:text-lg tracking-wider uppercase px-12 py-6 bg-accent text-accent-foreground hover:bg-accent/90 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+          >
+            <DownloadIcon className="mr-3 h-5 w-5" />
+            Em Breve
+          </Button>
           </div>
           
           {/* Subtitle */}
