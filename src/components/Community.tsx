@@ -42,7 +42,7 @@ const socialLinks = [
 
 const Community = () => {
   return (
-    <section className="relative min-h-screen flex items-center py-24 overflow-hidden bg-card">
+    <section className="relative min-h-screen flex items-center py-20 md:py-32 overflow-hidden bg-card">
       {/* Background */}
       <div 
         className="absolute inset-0 bg-cover bg-center opacity-25"
@@ -51,18 +51,18 @@ const Community = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-card via-card/90 to-card/40"></div>
       </div>
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-5xl mx-auto text-center space-y-16 animate-fade-in">
           {/* Title */}
-          <div className="space-y-6">
-            <h2 className="font-sans text-3xl md:text-4xl lg:text-5xl font-bold tracking-[0.15em] uppercase text-foreground">
+          <div>
+            <h2 className="font-sans text-3xl md:text-4xl lg:text-5xl font-bold tracking-[0.15em] uppercase text-foreground mb-8">
               Acompanhe os rastros do Verme.
             </h2>
             <div className="w-24 h-px bg-accent mx-auto"></div>
           </div>
           
           {/* Social Links Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {socialLinks.map((link) => {
               const Icon = link.icon;
               return (
@@ -93,11 +93,9 @@ const Community = () => {
           </div>
           
           {/* Footer Quote */}
-          <div className="pt-12">
-            <p className="font-mono text-sm md:text-base italic text-muted-foreground/80">
-              "O Verme não procura luz. Ele procura sentido."
-            </p>
-          </div>
+          <p className="font-mono text-sm md:text-base italic text-muted-foreground/80 pt-8">
+            "O Verme não procura luz. Ele procura sentido."
+          </p>
         </div>
       </div>
     </section>
