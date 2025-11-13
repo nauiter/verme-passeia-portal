@@ -18,7 +18,7 @@ const Quotes = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-card">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-card py-20 md:py-32">
       {/* Background Image with Overlay */}
       <div 
         className="absolute inset-0 bg-cover bg-center opacity-30"
@@ -28,24 +28,22 @@ const Quotes = () => {
       </div>
       
       {/* Quote Content */}
-      <div className="relative z-10 px-4 max-w-4xl mx-auto text-center">
-        <div className="space-y-12">
-          {quotes.map((quote, index) => (
-            <blockquote
-              key={index}
-              className={`font-mono text-2xl md:text-4xl lg:text-5xl italic text-foreground leading-relaxed transition-all duration-1000 ${
-                currentQuote === index
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 absolute translate-y-8"
-              }`}
-            >
-              "{quote}"
-            </blockquote>
-          ))}
-        </div>
+      <div className="relative z-10 px-6 max-w-4xl mx-auto text-center">
+        {quotes.map((quote, index) => (
+          <blockquote
+            key={index}
+            className={`font-mono text-2xl md:text-4xl lg:text-5xl italic text-foreground leading-relaxed transition-all duration-1000 ${
+              currentQuote === index
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 absolute translate-y-8"
+            }`}
+          >
+            "{quote}"
+          </blockquote>
+        ))}
         
         {/* Quote Navigation Dots */}
-        <div className="flex justify-center gap-3 mt-16">
+        <div className="flex justify-center gap-3 mt-20">
           {quotes.map((_, index) => (
             <button
               key={index}
@@ -55,7 +53,7 @@ const Quotes = () => {
                   ? "bg-accent w-8"
                   : "bg-muted-foreground/40"
               }`}
-              aria-label={`Quote ${index + 1}`}
+              aria-label={`Citação ${index + 1}`}
             />
           ))}
         </div>
