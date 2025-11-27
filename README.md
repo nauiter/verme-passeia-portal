@@ -1,73 +1,76 @@
-# Welcome to your Lovable project
+# O Verme Passeia
 
-## Project info
+> **"Uma jornada literária pela decadência urbana e existencialismo contemporâneo."**
 
-**URL**: https://lovable.dev/projects/c153330f-e7cc-4fda-9a61-dc1ede4b1dfe
+Este repositório contém o código-fonte da landing page oficial do e-book **O Verme Passeia** de Nauiter Master. Uma experiência web imersiva e visualmente impactante que reflete a estética brutalista e atmosfera sombria da obra.
 
-## How can I edit this code?
+## 🌑 Visão Geral do Projeto
 
-There are several ways of editing your application.
+Este projeto é uma **Single Page Application (SPA)** minimalista com recursos como:
+- **Design Brutalista:** Estética crua e minimalista com paleta escura e imagens cinematográficas.
+- **Experiência Imersiva:** Background music temático e navegação fluida.
+- **Seções Estruturadas:** Hero, citações, sobre a obra, download e comunidade.
+- **Performance Otimizada:** Imagens em formato WebP para carregamento rápido.
+- **Responsividade Total:** Layout adaptável para todos os dispositivos.
 
-**Use Lovable**
+## 🚀 Stack Tecnológico
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/c153330f-e7cc-4fda-9a61-dc1ede4b1dfe) and start prompting.
+O projeto foi construído utilizando tecnologias modernas do ecossistema React:
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Core:** [React 18](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/) + [Vite](https://vitejs.dev/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **UI Components:** [shadcn/ui](https://ui.shadcn.com/) (Radix UI)
+- **Roteamento:** [React Router DOM](https://reactrouter.com/)
+- **Ícones:** [Lucide React](https://lucide.dev/)
+- **Animações:** Transições suaves e micro-interações
 
-**Use your preferred IDE**
+## 🛠️ Instalação & Desenvolvimento Local
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Para executar este projeto localmente, siga os passos abaixo:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Pré-requisitos
+- Node.js (Versão 18 ou superior)
+- npm ou yarn
 
-Follow these steps:
+### Passos
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+1. **Clone o repositório**
+   ```bash
+   git clone https://github.com/seu-usuario/o-verme-passeia.git
+   cd o-verme-passeia
+   ```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+2. **Instale as dependências**
+   ```bash
+   npm install
+   ```
 
-# Step 3: Install the necessary dependencies.
-npm i
+3. **Inicie o servidor de desenvolvimento**
+   ```bash
+   npm run dev
+   ```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+4. **Build para produção**
+   ```bash
+   npm run build
+   ```
 
-**Edit a file directly in GitHub**
+## 📄 Estrutura do Projeto
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- `/src/components`: Componentes modulares (Hero, Quotes, About, Download, Community).
+- `/src/components/ui`: Componentes UI reutilizáveis do shadcn.
+- `/src/assets`: Imagens e recursos estáticos otimizados.
+- `/src/pages`: Páginas principais da aplicação.
+- `/public/audio`: Arquivos de áudio para background music.
 
-**Use GitHub Codespaces**
+## 🎨 Design System
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+O projeto utiliza um design system minimalista e brutalista com:
+- **Paleta de Cores:** Tons escuros e neutros (preto, cinza, branco).
+- **Tipografia:** Fontes system com hierarquia clara e legibilidade otimizada.
+- **Espaçamento:** Sistema de spacing coerente (8, 12, 16, 24, 40, 64, 96px).
+- **Imagens:** Fotografia cinematográfica de arquitetura urbana decadente.
 
-## What technologies are used for this project?
+---
 
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/c153330f-e7cc-4fda-9a61-dc1ede4b1dfe) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+© 2025 Nauiter Master. Todos os direitos reservados.
