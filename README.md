@@ -1,76 +1,76 @@
-# O Verme Passeia
+# The Worm Takes a Walk
 
-> **"Uma jornada literária pela decadência urbana e existencialismo contemporâneo."**
+> **"A literary journey through urban decay and contemporary existentialism."**
 
-Este repositório contém o código-fonte da landing page oficial do e-book **O Verme Passeia** de Nauiter Master. Uma experiência web imersiva e visualmente impactante que reflete a estética brutalista e atmosfera sombria da obra.
+This repository contains the source code for the official landing page of **The Worm Takes a Walk** e-book by Nauiter Master. An immersive and visually striking web experience that reflects the brutalist aesthetic and dark atmosphere of the work.
 
-## 🌑 Visão Geral do Projeto
+## 🌑 Project Overview
 
-Este projeto é uma **Single Page Application (SPA)** minimalista com recursos como:
-- **Design Brutalista:** Estética crua e minimalista com paleta escura e imagens cinematográficas.
-- **Experiência Imersiva:** Background music temático e navegação fluida.
-- **Seções Estruturadas:** Hero, citações, sobre a obra, download e comunidade.
-- **Performance Otimizada:** Imagens em formato WebP para carregamento rápido.
-- **Responsividade Total:** Layout adaptável para todos os dispositivos.
+This project is a minimalist **Single Page Application (SPA)** featuring:
+- **Brutalist Design:** Raw and minimalist aesthetic with dark palette and cinematic imagery.
+- **Immersive Experience:** Thematic background music and smooth navigation.
+- **Structured Sections:** Hero, quotes, about the work, download, and community.
+- **Optimized Performance:** WebP format images for fast loading.
+- **Full Responsiveness:** Adaptive layout for all devices.
 
-## 🚀 Stack Tecnológico
+## 🚀 Tech Stack
 
-O projeto foi construído utilizando tecnologias modernas do ecossistema React:
+The project was built using modern technologies from the React ecosystem:
 
 - **Core:** [React 18](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/) + [Vite](https://vitejs.dev/)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
 - **UI Components:** [shadcn/ui](https://ui.shadcn.com/) (Radix UI)
-- **Roteamento:** [React Router DOM](https://reactrouter.com/)
-- **Ícones:** [Lucide React](https://lucide.dev/)
-- **Animações:** Transições suaves e micro-interações
+- **Routing:** [React Router DOM](https://reactrouter.com/)
+- **Icons:** [Lucide React](https://lucide.dev/)
+- **Animations:** Smooth transitions and micro-interactions
 
-## 🛠️ Instalação & Desenvolvimento Local
+## 🛠️ Installation & Local Development
 
-Para executar este projeto localmente, siga os passos abaixo:
+To run this project locally, follow the steps below:
 
-### Pré-requisitos
-- Node.js (Versão 18 ou superior)
-- npm ou yarn
+### Prerequisites
+- Node.js (Version 18 or higher)
+- npm or yarn
 
-### Passos
+### Steps
 
-1. **Clone o repositório**
+1. **Clone the repository**
    ```bash
-   git clone https://github.com/seu-usuario/o-verme-passeia.git
-   cd o-verme-passeia
+   git clone https://github.com/your-username/the-worm-takes-a-walk.git
+   cd the-worm-takes-a-walk
    ```
 
-2. **Instale as dependências**
+2. **Install dependencies**
    ```bash
    npm install
    ```
 
-3. **Inicie o servidor de desenvolvimento**
+3. **Start the development server**
    ```bash
    npm run dev
    ```
 
-4. **Build para produção**
+4. **Build for production**
    ```bash
    npm run build
    ```
 
-## 📄 Estrutura do Projeto
+## 📄 Project Structure
 
-- `/src/components`: Componentes modulares (Hero, Quotes, About, Download, Community).
-- `/src/components/ui`: Componentes UI reutilizáveis do shadcn.
-- `/src/assets`: Imagens e recursos estáticos otimizados.
-- `/src/pages`: Páginas principais da aplicação.
-- `/public/audio`: Arquivos de áudio para background music.
+- `/src/components`: Modular components (Hero, Quotes, About, Download, Community).
+- `/src/components/ui`: Reusable UI components from shadcn.
+- `/src/assets`: Optimized images and static resources.
+- `/src/pages`: Main application pages.
+- `/public/audio`: Audio files for background music.
 
 ## 🎨 Design System
 
-O projeto utiliza um design system minimalista e brutalista com:
-- **Paleta de Cores:** Tons escuros e neutros (preto, cinza, branco).
-- **Tipografia:** Fontes system com hierarquia clara e legibilidade otimizada.
-- **Espaçamento:** Sistema de spacing coerente (8, 12, 16, 24, 40, 64, 96px).
-- **Imagens:** Fotografia cinematográfica de arquitetura urbana decadente.
+The project uses a minimalist and brutalist design system with:
+- **Color Palette:** Dark and neutral tones (black, gray, white).
+- **Typography:** System fonts with clear hierarchy and optimized readability.
+- **Spacing:** Coherent spacing system (8, 12, 16, 24, 40, 64, 96px).
+- **Images:** Cinematic photography of decadent urban architecture.
 
 ---
 
-© 2025 Nauiter Master. Todos os direitos reservados.
+© 2025 Nauiter Master. All rights reserved.
