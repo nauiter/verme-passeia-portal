@@ -122,8 +122,8 @@ const FloatingParticles = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0"
-      style={{ mixBlendMode: 'multiply', opacity: 0.8 }}
+      className="fixed inset-0 pointer-events-none z-50"
+      style={{ mixBlendMode: 'multiply', opacity: 0.6 }}
       aria-hidden="true"
     />
   );
