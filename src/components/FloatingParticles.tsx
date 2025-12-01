@@ -7,6 +7,8 @@ interface Particle {
   speedX: number;
   speedY: number;
   opacity: number;
+  rotation: number;
+  rotationSpeed: number;
 }
 
 const FloatingParticles = () => {
@@ -28,17 +30,20 @@ const FloatingParticles = () => {
     window.addEventListener('resize', setCanvasSize);
 
     const particles: Particle[] = [];
-    const particleCount = window.innerWidth < 768 ? 20 : 40;
+    // Mais partículas para efeito de fuligem constante
+    const particleCount = window.innerWidth < 768 ? 60 : 120;
 
-    // Create particles
+    // Create soot particles
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 2 + 1,
-        speedX: (Math.random() - 0.5) * 0.3,
-        speedY: (Math.random() - 0.5) * 0.3,
-        opacity: Math.random() * 0.3 + 0.1,
+        size: Math.random() * 3 + 0.5, // Tamanhos variados de fuligem
+        speedX: (Math.random() - 0.5) * 0.15, // Movimento horizontal sutil
+        speedY: Math.random() * 0.2 + 0.05, // Queda suave para baixo
+        opacity: Math.random() * 0.4 + 0.05, // Opacidade variável
+        rotation: Math.random() * Math.PI * 2,
+        rotationSpeed: (Math.random() - 0.5) * 0.01,
       });
     }
 
@@ -48,39 +53,59 @@ const FloatingParticles = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((particle) => {
-        // Update position
+        // Update position - fuligem cai suavemente
         particle.x += particle.speedX;
         particle.y += particle.speedY;
+        particle.rotation += particle.rotationSpeed;
 
         // Wrap around screen
-        if (particle.x < 0) particle.x = canvas.width;
-        if (particle.x > canvas.width) particle.x = 0;
-        if (particle.y < 0) particle.y = canvas.height;
-        if (particle.y > canvas.height) particle.y = 0;
+        if (particle.x < -10) particle.x = canvas.width + 10;
+        if (particle.x > canvas.width + 10) particle.x = -10;
+        // Fuligem retorna ao topo quando cai muito
+        if (particle.y > canvas.height + 10) {
+          particle.y = -10;
+          particle.x = Math.random() * canvas.width;
+        }
 
-        // Draw particle
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(174, 159, 126, ${particle.opacity})`;
-        ctx.fill();
-      });
+        // Save context for rotation
+        ctx.save();
+        ctx.translate(particle.x, particle.y);
+        ctx.rotate(particle.rotation);
 
-      // Draw connections
-      particles.forEach((particle, i) => {
-        particles.slice(i + 1).forEach((otherParticle) => {
-          const dx = particle.x - otherParticle.x;
-          const dy = particle.y - otherParticle.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < 150) {
+        // Draw soot particle - forma irregular
+        const sootShapes = [
+          // Círculo irregular
+          () => {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(174, 159, 126, ${0.1 * (1 - distance / 150)})`;
-            ctx.lineWidth = 0.5;
-            ctx.moveTo(particle.x, particle.y);
-            ctx.lineTo(otherParticle.x, otherParticle.y);
-            ctx.stroke();
+            ctx.arc(0, 0, particle.size, 0, Math.PI * 2);
+            ctx.fill();
+          },
+          // Forma alongada
+          () => {
+            ctx.beginPath();
+            ctx.ellipse(0, 0, particle.size, particle.size * 1.5, 0, 0, Math.PI * 2);
+            ctx.fill();
+          },
+          // Forma irregular
+          () => {
+            ctx.beginPath();
+            ctx.moveTo(0, -particle.size);
+            ctx.lineTo(particle.size * 0.7, particle.size * 0.3);
+            ctx.lineTo(-particle.size * 0.5, particle.size * 0.5);
+            ctx.closePath();
+            ctx.fill();
           }
-        });
+        ];
+
+        // Cor de fuligem - preto/cinza muito escuro
+        const grayValue = Math.floor(Math.random() * 30 + 10); // 10-40
+        ctx.fillStyle = `rgba(${grayValue}, ${grayValue}, ${grayValue}, ${particle.opacity})`;
+        
+        // Desenha forma aleatória
+        const shapeIndex = Math.floor(particle.x + particle.y) % 3;
+        sootShapes[shapeIndex]();
+
+        ctx.restore();
       });
 
       animationFrameId = requestAnimationFrame(animate);
@@ -98,7 +123,8 @@ const FloatingParticles = () => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      style={{ mixBlendMode: 'screen' }}
+      style={{ mixBlendMode: 'multiply', opacity: 0.8 }}
+      aria-hidden="true"
     />
   );
 };
