@@ -23,7 +23,7 @@ const Quotes = () => {
   return (
     <section 
       ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-card py-20 md:py-32"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-card py-20 md:py-32 before:absolute before:top-0 before:left-0 before:right-0 before:h-32 before:bg-gradient-to-b before:from-background before:to-transparent before:z-10 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-32 after:bg-gradient-to-t after:from-background after:to-transparent after:z-10"
     >
       {/* Background Image with Overlay */}
       <div 

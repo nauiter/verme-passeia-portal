@@ -51,7 +51,8 @@ const Community = () => {
   return (
     <section 
       ref={sectionRef}
-      className="relative min-h-screen flex items-center py-20 md:py-32 overflow-hidden bg-card"
+      className="relative min-h-screen flex items-center py-20 md:py-32 overflow-hidden bg-card before:absolute before:top-0 before:left-0 before:right-0 before:h-32 before:bg-gradient-to-b before:from-card/50 before:to-transparent before:z-10"
+      style={{ perspective: '1000px' }}
     >
       {/* Background */}
       <div 
@@ -88,18 +89,34 @@ const Community = () => {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative p-8 border border-border hover:border-accent transition-all duration-300 bg-background/40 hover:bg-background/60 backdrop-blur-sm"
+                  className="group relative p-8 border border-border hover:border-accent transition-all duration-500 bg-background/40 hover:bg-background/80 backdrop-blur-sm hover:shadow-2xl hover:shadow-accent/20"
                   style={{
-                    transitionDelay: contentVisible ? `${400 + idx * 100}ms` : '0ms'
+                    transitionDelay: contentVisible ? `${400 + idx * 100}ms` : '0ms',
+                    transformStyle: 'preserve-3d',
+                  }}
+                  onMouseMove={(e) => {
+                    const card = e.currentTarget;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    const card = e.currentTarget;
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
                   }}
                 >
-                  <div className="flex flex-col items-center gap-4">
-                    <Icon className="h-8 w-8 text-muted-foreground group-hover:text-accent transition-colors duration-300" />
+                  <div className="flex flex-col items-center gap-4 relative" style={{ transform: 'translateZ(20px)' }}>
+                    <Icon className="h-8 w-8 text-muted-foreground group-hover:text-accent transition-all duration-300 group-hover:scale-110" />
                     <div className="text-center">
-                      <p className="font-sans text-sm font-bold tracking-wider uppercase text-foreground mb-1">
+                      <p className="font-sans text-sm font-bold tracking-wider uppercase text-foreground mb-1 transition-all duration-300 group-hover:text-accent">
                         {link.name}
                       </p>
-                      <p className="font-mono text-xs text-muted-foreground">
+                      <p className="font-mono text-xs text-muted-foreground group-hover:text-foreground transition-colors duration-300">
                         {link.label}
                       </p>
                     </div>
@@ -107,6 +124,9 @@ const Community = () => {
                   
                   {/* Hover Effect Line */}
                   <div className="absolute bottom-0 left-0 w-full h-px bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                  
+                  {/* 3D Glow Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-accent/0 via-accent/0 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                 </a>
               );
             })}
