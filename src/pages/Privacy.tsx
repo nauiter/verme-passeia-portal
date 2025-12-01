@@ -9,7 +9,7 @@ const Privacy = () => {
         <Link to="/">
           <Button 
             variant="ghost" 
-            className="mb-6 hover:bg-secondary"
+            className="mb-6 border-2 border-foreground/20 hover:border-foreground/40 hover:bg-secondary"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Voltar para Home
