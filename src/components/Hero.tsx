@@ -39,8 +39,8 @@ const Hero = () => {
       
       {/* Scroll Indicator */}
       <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 animate-float">
-        <div className="w-6 h-10 border-2 border-muted-foreground/50 rounded-full flex justify-center p-2">
-          <div className="w-1 h-3 bg-muted-foreground/50 rounded-full animate-pulse"></div>
+        <div className="w-6 h-10 border-2 border-muted-foreground/50 rounded-full flex justify-center p-2 transition-all duration-300 hover:border-accent/70">
+          <div className="w-1 h-3 bg-accent/70 rounded-full animate-[float_3s_ease-in-out_infinite]"></div>
         </div>
       </div>
     </section>

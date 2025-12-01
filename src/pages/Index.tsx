@@ -4,6 +4,8 @@ import FooterNauiterMaster from "@/components/shared/FooterNauiterMaster";
 import BackgroundMusic from "@/components/BackgroundMusic";
 import CookieBanner from "@/components/CookieBanner";
 import ScrollToTop from "@/components/ScrollToTop";
+import LoadingSkeleton from "@/components/LoadingSkeleton";
+import SEO from "@/components/SEO";
 
 // Lazy load components below the fold
 const Quotes = lazy(() => import("@/components/Quotes"));
@@ -13,19 +15,22 @@ const Community = lazy(() => import("@/components/Community"));
 
 const Index = () => {
   return (
-    <main className="min-h-screen">
-      <BackgroundMusic />
-      <Hero />
-      <Suspense fallback={<div className="min-h-screen" />}>
-        <Quotes />
-        <About />
-        <Download />
-        <Community />
-      </Suspense>
-      <FooterNauiterMaster />
-      <CookieBanner />
-      <ScrollToTop />
-    </main>
+    <>
+      <SEO />
+      <main className="min-h-screen">
+        <BackgroundMusic />
+        <Hero />
+        <Suspense fallback={<LoadingSkeleton />}>
+          <Quotes />
+          <About />
+          <Download />
+          <Community />
+        </Suspense>
+        <FooterNauiterMaster />
+        <CookieBanner />
+        <ScrollToTop />
+      </main>
+    </>
   );
 };
 

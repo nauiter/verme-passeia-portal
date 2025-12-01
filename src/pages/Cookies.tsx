@@ -1,10 +1,17 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import SEO from "@/components/SEO";
 
 const Cookies = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <>
+      <SEO 
+        title="Política de Cookies | O Verme Passeia"
+        description="Saiba como utilizamos cookies para melhorar sua experiência no site O Verme Passeia."
+        path="/cookies"
+      />
+      <div className="min-h-screen bg-background text-foreground">
       <div className="container mx-auto px-4 py-16 max-w-4xl">
         <Link to="/">
           <Button 
@@ -139,6 +146,7 @@ const Cookies = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
