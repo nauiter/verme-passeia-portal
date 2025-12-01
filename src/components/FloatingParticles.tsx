@@ -52,7 +52,7 @@ const FloatingParticles = () => {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 3 + 0.5, // Tamanhos maiores para visibilidade
+        size: Math.random() * 4.5 + 0.2, // Variação ampla: poeira fina (0.2) até flocos grandes (4.7)
         speedX: (Math.random() - 0.5) * 0.2,
         speedY: Math.random() * 0.25 + 0.05,
         opacity: Math.random() * 0.45 + 0.15, // Opacidade aumentada
@@ -99,10 +99,10 @@ const FloatingParticles = () => {
       particles.push({
         x,
         y,
-        size: Math.random() * 3.5 + 0.5, // Maiores nas bordas
+        size: Math.random() * 5 + 0.8, // Maiores nas bordas: de 0.8 até 5.8
         speedX: (Math.random() - 0.5) * 0.1,
         speedY: Math.random() * 0.15 + 0.02,
-        opacity: Math.random() * 0.45 + 0.15, // Mais opacas
+        opacity: Math.random() * 0.5 + 0.2, // Mais opacas nas bordas
         rotation: Math.random() * Math.PI * 2,
         rotationSpeed: (Math.random() - 0.5) * 0.01,
         colorType,
