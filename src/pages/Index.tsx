@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import Hero from "@/components/Hero";
 import FooterNauiterMaster from "@/components/shared/FooterNauiterMaster";
 import BackgroundMusic from "@/components/BackgroundMusic";
+import CookieBanner from "@/components/CookieBanner";
 
 // Lazy load components below the fold
 const Quotes = lazy(() => import("@/components/Quotes"));
@@ -21,6 +22,7 @@ const Index = () => {
         <Community />
       </Suspense>
       <FooterNauiterMaster />
+      <CookieBanner />
     </main>
   );
 };
