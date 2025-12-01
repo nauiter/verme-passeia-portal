@@ -53,6 +53,7 @@ const Community = () => {
       ref={sectionRef}
       className="relative min-h-screen flex items-center py-20 md:py-32 px-4 sm:px-6 overflow-hidden bg-card before:absolute before:top-0 before:left-0 before:right-0 before:h-32 before:bg-gradient-to-b before:from-card/50 before:to-transparent before:z-10"
       style={{ perspective: '1000px' }}
+      aria-label="Redes sociais e comunidade"
     >
       {/* Background */}
       <div 
@@ -60,6 +61,8 @@ const Community = () => {
         style={{ 
           backgroundImage: `url(${brutalistRoad})`,
         }}
+        role="img"
+        aria-label="Estrada solitária em paisagem brutalista"
       >
         <div className="absolute inset-0 bg-gradient-to-t from-card via-card/90 to-card/40"></div>
       </div>

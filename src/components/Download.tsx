@@ -14,6 +14,7 @@ const Download = () => {
     <section 
       ref={sectionRef}
       className="relative min-h-screen flex items-center py-20 md:py-32 px-4 sm:px-6 overflow-hidden before:absolute before:top-0 before:left-0 before:right-0 before:h-32 before:bg-gradient-to-b before:from-background before:to-transparent before:z-10 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-32 after:bg-gradient-to-t after:from-card after:to-transparent after:z-10"
+      aria-label="Download de e-book"
     >
       {/* Background */}
       <div 
@@ -21,6 +22,8 @@ const Download = () => {
         style={{ 
           backgroundImage: `url(${abandonedBlocks})`,
         }}
+        role="img"
+        aria-label="Blocos arquitetônicos abandonados em estilo brutalista"
       >
         <div className="absolute inset-0 bg-gradient-to-br from-card via-background to-card"></div>
       </div>
