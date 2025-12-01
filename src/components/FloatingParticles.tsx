@@ -31,17 +31,17 @@ const FloatingParticles = () => {
     window.addEventListener('resize', setCanvasSize);
 
     const particles: Particle[] = [];
-    // Densidade aumentada para efeito mais intenso
-    const particleCount = window.innerWidth < 768 ? 100 : 200;
+    // Densidade otimizada para não prejudicar legibilidade
+    const particleCount = window.innerWidth < 768 ? 50 : 100;
 
     // Create soot particles with varied colors
     for (let i = 0; i < particleCount; i++) {
-      // Distribuição: 60% preto, 25% cinza, 15% branco
+      // Distribuição: 50% preto, 30% cinza, 20% branco
       const rand = Math.random();
       let colorType: 'black' | 'gray' | 'white';
-      if (rand < 0.6) {
+      if (rand < 0.5) {
         colorType = 'black';
-      } else if (rand < 0.85) {
+      } else if (rand < 0.8) {
         colorType = 'gray';
       } else {
         colorType = 'white';
@@ -50,10 +50,10 @@ const FloatingParticles = () => {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 3.5 + 0.3, // Tamanhos mais variados
-        speedX: (Math.random() - 0.5) * 0.2, // Movimento horizontal sutil
-        speedY: Math.random() * 0.25 + 0.05, // Queda suave para baixo
-        opacity: Math.random() * 0.5 + 0.1, // Opacidade mais variável
+        size: Math.random() * 2.5 + 0.3, // Tamanhos menores
+        speedX: (Math.random() - 0.5) * 0.2,
+        speedY: Math.random() * 0.25 + 0.05,
+        opacity: Math.random() * 0.35 + 0.08, // Opacidade reduzida
         rotation: Math.random() * Math.PI * 2,
         rotationSpeed: (Math.random() - 0.5) * 0.015,
         colorType,
@@ -110,18 +110,18 @@ const FloatingParticles = () => {
           }
         ];
 
-        // Cor de fuligem baseada no tipo
+        // Cor de fuligem baseada no tipo - opacidades ajustadas
         let fillStyle: string;
         if (particle.colorType === 'black') {
-          const grayValue = Math.floor(Math.random() * 30 + 10); // 10-40 (preto/cinza escuro)
-          fillStyle = `rgba(${grayValue}, ${grayValue}, ${grayValue}, ${particle.opacity})`;
+          const grayValue = Math.floor(Math.random() * 25 + 10); // 10-35 (preto/cinza escuro)
+          fillStyle = `rgba(${grayValue}, ${grayValue}, ${grayValue}, ${particle.opacity * 0.6})`;
         } else if (particle.colorType === 'gray') {
-          const grayValue = Math.floor(Math.random() * 80 + 100); // 100-180 (cinza médio)
-          fillStyle = `rgba(${grayValue}, ${grayValue}, ${grayValue}, ${particle.opacity * 0.7})`;
+          const grayValue = Math.floor(Math.random() * 70 + 110); // 110-180 (cinza médio)
+          fillStyle = `rgba(${grayValue}, ${grayValue}, ${grayValue}, ${particle.opacity * 0.5})`;
         } else {
           // white
-          const whiteValue = Math.floor(Math.random() * 40 + 215); // 215-255 (branco/cinza claro)
-          fillStyle = `rgba(${whiteValue}, ${whiteValue}, ${whiteValue}, ${particle.opacity * 0.5})`;
+          const whiteValue = Math.floor(Math.random() * 35 + 220); // 220-255 (branco/cinza claro)
+          fillStyle = `rgba(${whiteValue}, ${whiteValue}, ${whiteValue}, ${particle.opacity * 0.4})`;
         }
         
         ctx.fillStyle = fillStyle;
@@ -148,7 +148,7 @@ const FloatingParticles = () => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none"
-      style={{ mixBlendMode: 'normal', opacity: 0.75, zIndex: 9999 }}
+      style={{ mixBlendMode: 'normal', opacity: 0.5, zIndex: 9999 }}
       aria-hidden="true"
     />
   );
