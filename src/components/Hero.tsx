@@ -17,18 +17,18 @@ const Hero = () => {
       </div>
       
       {/* Content */}
-      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto animate-fade-in-slow">
-        <h1 className="font-sans text-5xl md:text-7xl lg:text-8xl font-bold tracking-[0.2em] uppercase mb-12 text-foreground">
+      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+        <h1 className="font-sans text-5xl md:text-7xl lg:text-8xl font-bold tracking-[0.2em] uppercase mb-12 text-foreground animate-fade-in opacity-0 [animation-delay:200ms] [animation-fill-mode:forwards]">
           O Verme Passeia
         </h1>
         
-        <p className="font-mono text-lg md:text-2xl lg:text-3xl italic tracking-wide text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+        <p className="font-mono text-lg md:text-2xl lg:text-3xl italic tracking-wide text-muted-foreground max-w-3xl mx-auto leading-relaxed animate-fade-in opacity-0 [animation-delay:500ms] [animation-fill-mode:forwards]">
           "Sem aplauso, sem destino, sem sentido... Ainda assim, o Verme continua a rastejar."
         </p>
         
-        <div className="w-32 h-px bg-accent mx-auto my-16 opacity-60"></div>
+        <div className="w-32 h-px bg-accent mx-auto my-16 opacity-60 animate-fade-in opacity-0 [animation-delay:800ms] [animation-fill-mode:forwards]"></div>
         
-        <p className="font-mono text-sm md:text-base text-muted-foreground max-w-2xl mx-auto tracking-wide leading-relaxed">
+        <p className="font-mono text-sm md:text-base text-muted-foreground max-w-2xl mx-auto tracking-wide leading-relaxed animate-fade-in opacity-0 [animation-delay:1100ms] [animation-fill-mode:forwards]">
           Um manifesto visual e poético sobre isolamento, lucidez e sobrevivência silenciosa em meio à ruína moderna.
         </p>
       </div>

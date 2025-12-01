@@ -36,17 +36,13 @@ const Quotes = () => {
       </div>
       
       {/* Quote Content */}
-      <div 
-        className={`relative z-10 px-6 max-w-4xl mx-auto text-center transition-all duration-1000 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-        }`}
-      >
+      <div className="relative z-10 px-6 max-w-4xl mx-auto text-center">
         {quotes.map((quote, index) => (
           <blockquote
             key={index}
             className={`font-mono text-2xl md:text-4xl lg:text-5xl italic text-foreground leading-relaxed transition-all duration-1000 ${
               currentQuote === index
-                ? "opacity-100 translate-y-0"
+                ? `opacity-100 translate-y-0 ${isVisible ? '' : 'opacity-0 translate-y-12'}`
                 : "opacity-0 absolute translate-y-8"
             }`}
           >
@@ -55,7 +51,11 @@ const Quotes = () => {
         ))}
         
         {/* Quote Navigation Dots */}
-        <div className="flex justify-center gap-3 mt-20">
+        <div 
+          className={`flex justify-center gap-3 mt-20 transition-all duration-1000 delay-300 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           {quotes.map((_, index) => (
             <button
               key={index}

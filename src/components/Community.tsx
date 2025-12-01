@@ -72,15 +72,15 @@ const Community = () => {
         >
           {/* Title */}
           <div>
-            <h2 className="font-sans text-3xl md:text-4xl lg:text-5xl font-bold tracking-[0.15em] uppercase text-foreground mb-8">
+            <h2 className={`font-sans text-3xl md:text-4xl lg:text-5xl font-bold tracking-[0.15em] uppercase text-foreground mb-8 transition-all duration-700 ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
               Acompanhe os rastros do Verme.
             </h2>
-            <div className="w-24 h-px bg-accent mx-auto"></div>
+            <div className={`w-24 h-px bg-accent mx-auto transition-all duration-700 delay-200 ${contentVisible ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`}></div>
           </div>
           
           {/* Social Links Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {socialLinks.map((link) => {
+          <div className={`grid sm:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-1000 delay-400 ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+            {socialLinks.map((link, idx) => {
               const Icon = link.icon;
               return (
                 <a
@@ -89,6 +89,9 @@ const Community = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative p-8 border border-border hover:border-accent transition-all duration-300 bg-background/40 hover:bg-background/60 backdrop-blur-sm"
+                  style={{
+                    transitionDelay: contentVisible ? `${400 + idx * 100}ms` : '0ms'
+                  }}
                 >
                   <div className="flex flex-col items-center gap-4">
                     <Icon className="h-8 w-8 text-muted-foreground group-hover:text-accent transition-colors duration-300" />
@@ -110,7 +113,7 @@ const Community = () => {
           </div>
           
           {/* Footer Quote */}
-          <p className="font-mono text-sm md:text-base italic text-muted-foreground/80 pt-8">
+          <p className={`font-mono text-sm md:text-base italic text-muted-foreground/80 pt-8 transition-all duration-700 delay-1000 ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             "O Verme não procura luz. Ele procura sentido."
           </p>
         </div>
