@@ -9,6 +9,7 @@ interface Particle {
   opacity: number;
   rotation: number;
   rotationSpeed: number;
+  colorType: 'black' | 'gray' | 'white';
 }
 
 const FloatingParticles = () => {
@@ -30,20 +31,32 @@ const FloatingParticles = () => {
     window.addEventListener('resize', setCanvasSize);
 
     const particles: Particle[] = [];
-    // Mais partículas para efeito de fuligem constante
-    const particleCount = window.innerWidth < 768 ? 60 : 120;
+    // Densidade aumentada para efeito mais intenso
+    const particleCount = window.innerWidth < 768 ? 100 : 200;
 
-    // Create soot particles
+    // Create soot particles with varied colors
     for (let i = 0; i < particleCount; i++) {
+      // Distribuição: 60% preto, 25% cinza, 15% branco
+      const rand = Math.random();
+      let colorType: 'black' | 'gray' | 'white';
+      if (rand < 0.6) {
+        colorType = 'black';
+      } else if (rand < 0.85) {
+        colorType = 'gray';
+      } else {
+        colorType = 'white';
+      }
+
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 3 + 0.5, // Tamanhos variados de fuligem
-        speedX: (Math.random() - 0.5) * 0.15, // Movimento horizontal sutil
-        speedY: Math.random() * 0.2 + 0.05, // Queda suave para baixo
-        opacity: Math.random() * 0.4 + 0.05, // Opacidade variável
+        size: Math.random() * 3.5 + 0.3, // Tamanhos mais variados
+        speedX: (Math.random() - 0.5) * 0.2, // Movimento horizontal sutil
+        speedY: Math.random() * 0.25 + 0.05, // Queda suave para baixo
+        opacity: Math.random() * 0.5 + 0.1, // Opacidade mais variável
         rotation: Math.random() * Math.PI * 2,
-        rotationSpeed: (Math.random() - 0.5) * 0.01,
+        rotationSpeed: (Math.random() - 0.5) * 0.015,
+        colorType,
       });
     }
 
@@ -97,9 +110,21 @@ const FloatingParticles = () => {
           }
         ];
 
-        // Cor de fuligem - preto/cinza muito escuro
-        const grayValue = Math.floor(Math.random() * 30 + 10); // 10-40
-        ctx.fillStyle = `rgba(${grayValue}, ${grayValue}, ${grayValue}, ${particle.opacity})`;
+        // Cor de fuligem baseada no tipo
+        let fillStyle: string;
+        if (particle.colorType === 'black') {
+          const grayValue = Math.floor(Math.random() * 30 + 10); // 10-40 (preto/cinza escuro)
+          fillStyle = `rgba(${grayValue}, ${grayValue}, ${grayValue}, ${particle.opacity})`;
+        } else if (particle.colorType === 'gray') {
+          const grayValue = Math.floor(Math.random() * 80 + 100); // 100-180 (cinza médio)
+          fillStyle = `rgba(${grayValue}, ${grayValue}, ${grayValue}, ${particle.opacity * 0.7})`;
+        } else {
+          // white
+          const whiteValue = Math.floor(Math.random() * 40 + 215); // 215-255 (branco/cinza claro)
+          fillStyle = `rgba(${whiteValue}, ${whiteValue}, ${whiteValue}, ${particle.opacity * 0.5})`;
+        }
+        
+        ctx.fillStyle = fillStyle;
         
         // Desenha forma aleatória
         const shapeIndex = Math.floor(particle.x + particle.y) % 3;
@@ -123,7 +148,7 @@ const FloatingParticles = () => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-50"
-      style={{ mixBlendMode: 'multiply', opacity: 0.6 }}
+      style={{ mixBlendMode: 'normal', opacity: 0.7 }}
       aria-hidden="true"
     />
   );
