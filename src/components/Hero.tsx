@@ -1,9 +1,6 @@
-import { useRef } from "react";
 import spiralStaircase from "@/assets/spiral-staircase.webp";
-import { useParallax } from "@/hooks/useScrollAnimation";
 
 const Hero = () => {
-  const parallaxOffset = useParallax(0.5);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -12,8 +9,7 @@ const Hero = () => {
         <img 
           src={spiralStaircase} 
           alt=""
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-300"
-          style={{ transform: `translateY(${parallaxOffset}px)` }}
+          className="absolute inset-0 w-full h-full object-cover"
           fetchPriority="high"
           loading="eager"
         />

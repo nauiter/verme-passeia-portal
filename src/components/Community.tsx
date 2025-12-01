@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { Youtube, Twitter, Linkedin, ExternalLink, Instagram, Facebook } from "lucide-react";
 import brutalistRoad from "@/assets/brutalist-road.webp";
-import { useScrollAnimation, useParallax } from "@/hooks/useScrollAnimation";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const socialLinks = [
   {
@@ -47,7 +47,6 @@ const Community = () => {
   const contentRef = useRef<HTMLDivElement>(null);
   const isVisible = useScrollAnimation(sectionRef, { threshold: 0.2 });
   const contentVisible = useScrollAnimation(contentRef, { threshold: 0.3 });
-  const parallaxOffset = useParallax(0.25);
 
   return (
     <section 
@@ -56,10 +55,9 @@ const Community = () => {
     >
       {/* Background */}
       <div 
-        className="absolute inset-0 bg-cover bg-center opacity-25 transition-transform duration-700"
+        className="absolute inset-0 bg-cover bg-center opacity-25"
         style={{ 
           backgroundImage: `url(${brutalistRoad})`,
-          transform: `translateY(${parallaxOffset}px)`,
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-t from-card via-card/90 to-card/40"></div>
