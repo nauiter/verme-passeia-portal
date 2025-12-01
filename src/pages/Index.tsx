@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import FooterNauiterMaster from "@/components/shared/FooterNauiterMaster";
 import BackgroundMusic from "@/components/BackgroundMusic";
 import CookieBanner from "@/components/CookieBanner";
+import ScrollToTop from "@/components/ScrollToTop";
 
 // Lazy load components below the fold
 const Quotes = lazy(() => import("@/components/Quotes"));
@@ -23,6 +24,7 @@ const Index = () => {
       </Suspense>
       <FooterNauiterMaster />
       <CookieBanner />
+      <ScrollToTop />
     </main>
   );
 };
