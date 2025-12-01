@@ -2,17 +2,26 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import SEO from "@/components/SEO";
+import Breadcrumb from "@/components/shared/Breadcrumb";
 
 const Terms = () => {
+  const publishedTime = "2025-01-01T00:00:00+00:00";
+  const modifiedTime = "2025-01-01T00:00:00+00:00";
+
   return (
     <>
       <SEO 
         title="Termos de Uso | O Verme Passeia"
         description="Leia os Termos de Uso do projeto O Verme Passeia. Condições de acesso e uso do site."
         path="/termos"
+        type="article"
+        publishedTime={publishedTime}
+        modifiedTime={modifiedTime}
       />
       <div className="min-h-screen bg-background text-foreground">
       <div className="container mx-auto px-4 py-16 max-w-4xl">
+        <Breadcrumb items={[{ label: "Termos de Uso" }]} />
+        
         <Link to="/">
           <Button 
             variant="ghost" 
