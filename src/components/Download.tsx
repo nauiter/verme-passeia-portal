@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Download as DownloadIcon } from "lucide-react";
 import abandonedBlocks from "@/assets/abandoned-blocks.webp";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import LazyBackgroundImage from "@/components/shared/LazyBackgroundImage";
 
 const Download = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -17,16 +18,13 @@ const Download = () => {
       aria-label="Download de e-book"
     >
       {/* Background */}
-      <div 
+      <LazyBackgroundImage
+        src={abandonedBlocks}
         className="absolute inset-0 bg-cover bg-center opacity-20"
-        style={{ 
-          backgroundImage: `url(${abandonedBlocks})`,
-        }}
-        role="img"
-        aria-label="Blocos arquitetônicos abandonados em estilo brutalista"
+        alt="Blocos arquitetônicos abandonados em estilo brutalista"
       >
         <div className="absolute inset-0 bg-gradient-to-br from-card via-background to-card"></div>
-      </div>
+      </LazyBackgroundImage>
       
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div 

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import crackedBuilding from "@/assets/cracked-building.webp";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import LazyBackgroundImage from "@/components/shared/LazyBackgroundImage";
 
 const quotes = [
   "Há beleza no que não quer ser visto.",
@@ -27,16 +28,13 @@ const Quotes = () => {
       aria-label="Citações filosóficas"
     >
       {/* Background Image with Overlay */}
-      <div 
+      <LazyBackgroundImage
+        src={crackedBuilding}
         className="absolute inset-0 bg-cover bg-center opacity-30"
-        style={{ 
-          backgroundImage: `url(${crackedBuilding})`,
-        }}
-        role="img"
-        aria-label="Edifício com rachaduras, representando beleza na decadência"
+        alt="Edifício com rachaduras, representando beleza na decadência"
       >
         <div className="absolute inset-0 bg-gradient-to-t from-card via-card/70 to-card/30"></div>
-      </div>
+      </LazyBackgroundImage>
       
       {/* Quote Content */}
       <div className="relative z-10 px-4 sm:px-6 max-w-4xl mx-auto text-center w-full">

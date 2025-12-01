@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import darkTower from "@/assets/dark-tower.webp";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import LazyImage from "@/components/shared/LazyImage";
 
 const About = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -55,7 +56,7 @@ const About = () => {
             }`}
           >
             <div className="relative overflow-hidden">
-              <img 
+              <LazyImage 
                 src={darkTower} 
                 alt="Torre solitária em névoa brutalista" 
                 width="600"
