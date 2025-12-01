@@ -168,8 +168,43 @@ const FloatingParticles = () => {
     let time = 0;
     let frameCount = 0;
     let lastLogTime = Date.now();
+    let lastFrameTime = Date.now();
+    let isHealthy = true;
+
+    // Sistema de health check e auto-recuperação
+    const healthCheck = () => {
+      const now = Date.now();
+      const timeSinceLastFrame = now - lastFrameTime;
+      
+      // Se não houver frames por mais de 100ms, há um problema
+      if (timeSinceLastFrame > 100 && isHealthy) {
+        console.warn('[FloatingParticles] Sistema pausado detectado. Tentando recuperar...');
+        isHealthy = false;
+        
+        // Cancelar animação antiga e reiniciar
+        if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+        }
+        
+        // Verificar se canvas ainda está válido
+        if (canvas && ctx && canvas.width > 0 && canvas.height > 0) {
+          console.log('[FloatingParticles] Canvas válido. Reiniciando animação...');
+          isHealthy = true;
+          animationFrameId = requestAnimationFrame(animate);
+        } else {
+          console.error('[FloatingParticles] Canvas inválido. Não é possível recuperar.');
+        }
+      } else if (timeSinceLastFrame <= 100 && !isHealthy) {
+        console.log('[FloatingParticles] Sistema recuperado com sucesso!');
+        isHealthy = true;
+      }
+    };
+
+    // Executar health check a cada 200ms
+    const healthCheckInterval = setInterval(healthCheck, 200);
 
     const animate = () => {
+      lastFrameTime = Date.now();
       frameCount++;
       time += 0.01;
       
@@ -230,6 +265,28 @@ const FloatingParticles = () => {
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+      // Definir formas de fuligem uma única vez (fora do loop)
+      const drawSootShape = (particle: Particle, index: number) => {
+        ctx.beginPath();
+        
+        switch(index) {
+          case 0: // Círculo irregular
+            ctx.arc(0, 0, particle.size, 0, Math.PI * 2);
+            break;
+          case 1: // Forma alongada
+            ctx.ellipse(0, 0, particle.size, particle.size * 1.5, 0, 0, Math.PI * 2);
+            break;
+          case 2: // Forma irregular triangular
+            ctx.moveTo(0, -particle.size);
+            ctx.lineTo(particle.size * 0.7, particle.size * 0.3);
+            ctx.lineTo(-particle.size * 0.5, particle.size * 0.5);
+            ctx.closePath();
+            break;
+        }
+        
+        ctx.fill();
+      };
+
       particles.forEach((particle) => {
         // Turbulência orgânica usando ruído
         const turbulenceX = (noise(particle.noiseOffsetX + time, particle.noiseOffsetY) - 0.5) * 0.3;
@@ -273,31 +330,6 @@ const FloatingParticles = () => {
           ctx.filter = `blur(${blurAmount}px)`;
         }
 
-        // Draw soot particle - forma irregular
-        const sootShapes = [
-          // Círculo irregular
-          () => {
-            ctx.beginPath();
-            ctx.arc(0, 0, particle.size, 0, Math.PI * 2);
-            ctx.fill();
-          },
-          // Forma alongada
-          () => {
-            ctx.beginPath();
-            ctx.ellipse(0, 0, particle.size, particle.size * 1.5, 0, 0, Math.PI * 2);
-            ctx.fill();
-          },
-          // Forma irregular
-          () => {
-            ctx.beginPath();
-            ctx.moveTo(0, -particle.size);
-            ctx.lineTo(particle.size * 0.7, particle.size * 0.3);
-            ctx.lineTo(-particle.size * 0.5, particle.size * 0.5);
-            ctx.closePath();
-            ctx.fill();
-          }
-        ];
-
         // Cor de fuligem baseada no tipo - opacidades aumentadas para visibilidade
         let fillStyle: string;
         if (particle.colorType === 'black') {
@@ -314,9 +346,9 @@ const FloatingParticles = () => {
         
         ctx.fillStyle = fillStyle;
         
-        // Desenha forma aleatória
-        const shapeIndex = Math.floor(particle.x + particle.y) % 3;
-        sootShapes[shapeIndex]();
+        // Desenha forma baseada em hash da posição inicial
+        const shapeIndex = Math.abs(Math.floor(particle.noiseOffsetX * 3) % 3);
+        drawSootShape(particle, shapeIndex);
 
         // Reset filter
         ctx.filter = 'none';
@@ -331,6 +363,7 @@ const FloatingParticles = () => {
 
     return () => {
       console.log('[FloatingParticles] Componente desmontado - limpando recursos');
+      clearInterval(healthCheckInterval);
       window.removeEventListener('resize', setCanvasSize);
       window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(animationFrameId);
