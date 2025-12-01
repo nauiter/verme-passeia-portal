@@ -11,6 +11,8 @@ interface Particle {
   rotationSpeed: number;
   colorType: 'black' | 'gray' | 'white';
   depth: number; // 0.3 (distante) a 1.0 (próximo) - para efeito parallax
+  noiseOffsetX: number; // Offset para turbulência
+  noiseOffsetY: number;
 }
 
 const FloatingParticles = () => {
@@ -43,6 +45,24 @@ const FloatingParticles = () => {
     let windChangeTime = Date.now();
     const windChangeInterval = 3000 + Math.random() * 4000; // Muda a cada 3-7 segundos
 
+    // Mouse tracking para interação
+    let mouseX = -1000;
+    let mouseY = -1000;
+    const mouseRadius = 120; // Raio de influência do mouse
+
+    // Função de ruído simplificada para turbulência
+    const noise = (x: number, y: number) => {
+      const sin = Math.sin(x * 0.01) * Math.cos(y * 0.01);
+      return sin * 0.5 + 0.5; // Normaliza entre 0 e 1
+    };
+
+    // Track mouse position
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+
     // Create regular soot particles
     for (let i = 0; i < particleCount; i++) {
       // Distribuição: 50% preto, 30% cinza, 20% branco
@@ -72,6 +92,8 @@ const FloatingParticles = () => {
         rotationSpeed: (Math.random() - 0.5) * 0.015,
         colorType,
         depth,
+        noiseOffsetX: Math.random() * 1000,
+        noiseOffsetY: Math.random() * 1000,
       });
     }
 
@@ -125,12 +147,16 @@ const FloatingParticles = () => {
         rotationSpeed: (Math.random() - 0.5) * 0.01,
         colorType,
         depth,
+        noiseOffsetX: Math.random() * 1000,
+        noiseOffsetY: Math.random() * 1000,
       });
     }
 
     let animationFrameId: number;
+    let time = 0;
 
     const animate = () => {
+      time += 0.01;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Sistema de rajadas de vento
@@ -168,9 +194,26 @@ const FloatingParticles = () => {
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((particle) => {
-        // Update position - fuligem cai suavemente + efeito do vento com parallax
-        particle.x += particle.speedX + (windForce * 0.5 * particle.depth); // Vento afeta mais as próximas
-        particle.y += particle.speedY;
+        // Turbulência orgânica usando ruído
+        const turbulenceX = (noise(particle.noiseOffsetX + time, particle.noiseOffsetY) - 0.5) * 0.3;
+        const turbulenceY = (noise(particle.noiseOffsetY + time, particle.noiseOffsetX) - 0.5) * 0.15;
+
+        // Interação com mouse - repulsão suave
+        const dx = particle.x - mouseX;
+        const dy = particle.y - mouseY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        let mouseForceX = 0;
+        let mouseForceY = 0;
+        
+        if (distance < mouseRadius && distance > 0) {
+          const force = ((mouseRadius - distance) / mouseRadius) * 0.8 * particle.depth;
+          mouseForceX = (dx / distance) * force;
+          mouseForceY = (dy / distance) * force;
+        }
+
+        // Update position - fuligem cai suavemente + vento + turbulência + mouse
+        particle.x += particle.speedX + (windForce * 0.5 * particle.depth) + turbulenceX + mouseForceX;
+        particle.y += particle.speedY + turbulenceY + mouseForceY;
         particle.rotation += particle.rotationSpeed;
 
         // Wrap around screen
@@ -186,6 +229,12 @@ const FloatingParticles = () => {
         ctx.save();
         ctx.translate(particle.x, particle.y);
         ctx.rotate(particle.rotation);
+
+        // Blur por profundidade - partículas distantes ficam desfocadas
+        const blurAmount = (1 - particle.depth) * 2;
+        if (blurAmount > 0.3) {
+          ctx.filter = `blur(${blurAmount}px)`;
+        }
 
         // Draw soot particle - forma irregular
         const sootShapes = [
@@ -232,6 +281,8 @@ const FloatingParticles = () => {
         const shapeIndex = Math.floor(particle.x + particle.y) % 3;
         sootShapes[shapeIndex]();
 
+        // Reset filter
+        ctx.filter = 'none';
         ctx.restore();
       });
 
@@ -242,6 +293,7 @@ const FloatingParticles = () => {
 
     return () => {
       window.removeEventListener('resize', setCanvasSize);
+      window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
