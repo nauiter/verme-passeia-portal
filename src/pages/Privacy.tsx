@@ -1,10 +1,17 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import SEO from "@/components/SEO";
 
 const Privacy = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <>
+      <SEO 
+        title="Política de Privacidade | O Verme Passeia"
+        description="Conheça nossa Política de Privacidade e como tratamos seus dados de acordo com a LGPD."
+        path="/privacidade"
+      />
+      <div className="min-h-screen bg-background text-foreground">
       <div className="container mx-auto px-4 py-16 max-w-4xl">
         <Link to="/">
           <Button 
@@ -115,6 +122,7 @@ const Privacy = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

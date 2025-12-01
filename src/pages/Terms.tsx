@@ -1,10 +1,17 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import SEO from "@/components/SEO";
 
 const Terms = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <>
+      <SEO 
+        title="Termos de Uso | O Verme Passeia"
+        description="Leia os Termos de Uso do projeto O Verme Passeia. Condições de acesso e uso do site."
+        path="/termos"
+      />
+      <div className="min-h-screen bg-background text-foreground">
       <div className="container mx-auto px-4 py-16 max-w-4xl">
         <Link to="/">
           <Button 
@@ -96,6 +103,7 @@ const Terms = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
