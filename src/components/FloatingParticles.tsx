@@ -33,8 +33,10 @@ const FloatingParticles = () => {
     const particles: Particle[] = [];
     // Densidade otimizada para não prejudicar legibilidade
     const particleCount = window.innerWidth < 768 ? 50 : 100;
+    // Partículas extras para as bordas
+    const edgeParticleCount = window.innerWidth < 768 ? 30 : 60;
 
-    // Create soot particles with varied colors
+    // Create regular soot particles
     for (let i = 0; i < particleCount; i++) {
       // Distribuição: 50% preto, 30% cinza, 20% branco
       const rand = Math.random();
@@ -50,12 +52,59 @@ const FloatingParticles = () => {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 2.5 + 0.3, // Tamanhos menores
+        size: Math.random() * 2.5 + 0.3,
         speedX: (Math.random() - 0.5) * 0.2,
         speedY: Math.random() * 0.25 + 0.05,
-        opacity: Math.random() * 0.35 + 0.08, // Opacidade reduzida
+        opacity: Math.random() * 0.35 + 0.08,
         rotation: Math.random() * Math.PI * 2,
         rotationSpeed: (Math.random() - 0.5) * 0.015,
+        colorType,
+      });
+    }
+
+    // Create edge particles - concentradas nas bordas
+    for (let i = 0; i < edgeParticleCount; i++) {
+      const edge = Math.floor(Math.random() * 4); // 0=top, 1=right, 2=bottom, 3=left
+      let x, y;
+      
+      switch(edge) {
+        case 0: // top
+          x = Math.random() * canvas.width;
+          y = Math.random() * 150; // primeiros 150px
+          break;
+        case 1: // right
+          x = canvas.width - Math.random() * 150;
+          y = Math.random() * canvas.height;
+          break;
+        case 2: // bottom
+          x = Math.random() * canvas.width;
+          y = canvas.height - Math.random() * 150;
+          break;
+        default: // left
+          x = Math.random() * 150;
+          y = Math.random() * canvas.height;
+      }
+
+      // Partículas das bordas são mais escuras e maiores
+      const rand = Math.random();
+      let colorType: 'black' | 'gray' | 'white';
+      if (rand < 0.7) {
+        colorType = 'black';
+      } else if (rand < 0.9) {
+        colorType = 'gray';
+      } else {
+        colorType = 'white';
+      }
+
+      particles.push({
+        x,
+        y,
+        size: Math.random() * 3.5 + 0.5, // Maiores nas bordas
+        speedX: (Math.random() - 0.5) * 0.1,
+        speedY: Math.random() * 0.15 + 0.02,
+        opacity: Math.random() * 0.45 + 0.15, // Mais opacas
+        rotation: Math.random() * Math.PI * 2,
+        rotationSpeed: (Math.random() - 0.5) * 0.01,
         colorType,
       });
     }
@@ -64,6 +113,22 @@ const FloatingParticles = () => {
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Desenhar vinheta de fuligem nas bordas
+      const gradient = ctx.createRadialGradient(
+        canvas.width / 2,
+        canvas.height / 2,
+        Math.min(canvas.width, canvas.height) * 0.3,
+        canvas.width / 2,
+        canvas.height / 2,
+        Math.max(canvas.width, canvas.height) * 0.7
+      );
+      gradient.addColorStop(0, 'rgba(0, 0, 0, 0)');
+      gradient.addColorStop(0.7, 'rgba(20, 20, 20, 0.05)');
+      gradient.addColorStop(1, 'rgba(15, 15, 15, 0.15)');
+      
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((particle) => {
         // Update position - fuligem cai suavemente
