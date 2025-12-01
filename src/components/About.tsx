@@ -13,10 +13,10 @@ const About = () => {
   return (
     <section 
       ref={sectionRef}
-      className="relative min-h-screen flex items-center py-20 md:py-32 overflow-hidden bg-background before:absolute before:top-0 before:left-0 before:right-0 before:h-32 before:bg-gradient-to-b before:from-card before:to-transparent before:z-10 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-32 after:bg-gradient-to-t after:from-card after:to-transparent after:z-10"
+      className="relative min-h-screen flex items-center py-20 md:py-32 px-4 sm:px-6 overflow-hidden bg-background before:absolute before:top-0 before:left-0 before:right-0 before:h-32 before:bg-gradient-to-b before:from-card before:to-transparent before:z-10 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-32 after:bg-gradient-to-t after:from-card after:to-transparent after:z-10"
     >
-      <div className="container mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-16 lg:gap-24 items-center max-w-7xl mx-auto">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="grid md:grid-cols-2 gap-12 lg:gap-24 items-center max-w-7xl mx-auto">
           {/* Text Content */}
           <div 
             ref={textRef}

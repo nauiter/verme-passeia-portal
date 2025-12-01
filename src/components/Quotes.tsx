@@ -23,7 +23,7 @@ const Quotes = () => {
   return (
     <section 
       ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-card py-20 md:py-32 before:absolute before:top-0 before:left-0 before:right-0 before:h-32 before:bg-gradient-to-b before:from-background before:to-transparent before:z-10 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-32 after:bg-gradient-to-t after:from-background after:to-transparent after:z-10"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-card py-20 md:py-32 px-4 sm:px-6 before:absolute before:top-0 before:left-0 before:right-0 before:h-32 before:bg-gradient-to-b before:from-background before:to-transparent before:z-10 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-32 after:bg-gradient-to-t after:from-background after:to-transparent after:z-10"
     >
       {/* Background Image with Overlay */}
       <div 
@@ -36,11 +36,11 @@ const Quotes = () => {
       </div>
       
       {/* Quote Content */}
-      <div className="relative z-10 px-6 max-w-4xl mx-auto text-center">
+      <div className="relative z-10 px-4 sm:px-6 max-w-4xl mx-auto text-center w-full">
         {quotes.map((quote, index) => (
           <blockquote
             key={index}
-            className={`font-mono text-2xl md:text-4xl lg:text-5xl italic text-foreground leading-relaxed transition-all duration-1000 ${
+            className={`font-mono text-xl sm:text-2xl md:text-4xl lg:text-5xl italic text-foreground leading-relaxed transition-all duration-1000 px-4 ${
               currentQuote === index
                 ? `opacity-100 translate-y-0 ${isVisible ? '' : 'opacity-0 translate-y-12'}`
                 : "opacity-0 absolute translate-y-8"
@@ -52,7 +52,7 @@ const Quotes = () => {
         
         {/* Quote Navigation Dots */}
         <div 
-          className={`flex justify-center gap-3 mt-20 transition-all duration-1000 delay-300 ${
+          className={`flex justify-center gap-2 sm:gap-3 mt-16 sm:mt-20 transition-all duration-1000 delay-300 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
@@ -62,7 +62,7 @@ const Quotes = () => {
               onClick={() => setCurrentQuote(index)}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${
                 currentQuote === index
-                  ? "bg-accent w-8"
+                  ? "bg-accent w-6 sm:w-8"
                   : "bg-muted-foreground/40"
               }`}
               aria-label={`Citação ${index + 1}`}
