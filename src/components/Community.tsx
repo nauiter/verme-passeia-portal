@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { Youtube, Twitter, Linkedin, ExternalLink, Instagram, Facebook } from "lucide-react";
 import brutalistRoad from "@/assets/brutalist-road.webp";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import LazyBackgroundImage from "@/components/shared/LazyBackgroundImage";
 
 const socialLinks = [
   {
@@ -56,16 +57,13 @@ const Community = () => {
       aria-label="Redes sociais e comunidade"
     >
       {/* Background */}
-      <div 
+      <LazyBackgroundImage
+        src={brutalistRoad}
         className="absolute inset-0 bg-cover bg-center opacity-25"
-        style={{ 
-          backgroundImage: `url(${brutalistRoad})`,
-        }}
-        role="img"
-        aria-label="Estrada solitária em paisagem brutalista"
+        alt="Estrada solitária em paisagem brutalista"
       >
         <div className="absolute inset-0 bg-gradient-to-t from-card via-card/90 to-card/40"></div>
-      </div>
+      </LazyBackgroundImage>
       
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div 
