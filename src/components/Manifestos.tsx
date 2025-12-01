@@ -3,7 +3,7 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const manifestos = [
   "Não há grandeza no espetáculo. Há apenas verdade no silêncio.",
-  "O concreto não mente. Ele envelhece, racha, desmorona — e ainda assim permanece.",
+  "O concreto não mente. Ele envelhece, racha, desmorona e ainda assim permanece.",
   "Rastejamos não por fraqueza, mas por escolha. O chão conhece mais segredos que o céu.",
   "A beleza não precisa ser vista para existir. Ela sobrevive melhor assim.",
   "O Verme não busca redenção. Ele aceita o peso de existir sem propósito.",
