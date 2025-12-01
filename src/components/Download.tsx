@@ -34,28 +34,28 @@ const Download = () => {
         >
           {/* Title */}
           <div>
-            <h2 className="font-sans text-4xl md:text-5xl lg:text-6xl font-bold tracking-[0.15em] uppercase text-foreground mb-8">
+            <h2 className={`font-sans text-4xl md:text-5xl lg:text-6xl font-bold tracking-[0.15em] uppercase text-foreground mb-8 transition-all duration-700 ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
               Desça mais fundo.
             </h2>
-            <div className="w-24 h-px bg-accent mx-auto"></div>
+            <div className={`w-24 h-px bg-accent mx-auto transition-all duration-700 delay-200 ${contentVisible ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`}></div>
           </div>
           
           {/* Description */}
-          <p className="font-mono text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+          <p className={`font-mono text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto transition-all duration-700 delay-400 ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             Baixe gratuitamente o e-book <span className="text-accent italic">O Verme Passeia – Primeiros Rastros</span> e mergulhe em nossos escritos completos.
           </p>
           
           {/* CTA Button */}
           <Button 
             size="lg"
-            className="font-sans text-base md:text-lg tracking-wider uppercase px-12 py-6 bg-accent text-accent-foreground hover:bg-accent/90 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+            className={`font-sans text-base md:text-lg tracking-wider uppercase px-12 py-6 bg-accent text-accent-foreground hover:bg-accent/90 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'} delay-600`}
           >
             <DownloadIcon className="mr-3 h-5 w-5" />
             Em Breve
           </Button>
           
           {/* Subtitle */}
-          <p className="font-mono text-sm text-muted-foreground/60 italic">
+          <p className={`font-mono text-sm text-muted-foreground/60 italic transition-all duration-700 delay-700 ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             Um caminho solitário dentro do universo do projeto
           </p>
         </div>

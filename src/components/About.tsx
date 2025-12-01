@@ -24,23 +24,23 @@ const About = () => {
               textVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
             }`}
           >
-            <div>
-              <div className="w-16 h-px bg-accent mb-8"></div>
-              <h2 className="font-sans text-4xl md:text-5xl lg:text-6xl font-bold tracking-wider uppercase text-foreground">
+            <div className={`transition-all duration-700 ${textVisible ? 'opacity-100' : 'opacity-0'}`}>
+              <div className={`w-16 h-px bg-accent mb-8 transition-all duration-700 delay-100 ${textVisible ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`}></div>
+              <h2 className={`font-sans text-4xl md:text-5xl lg:text-6xl font-bold tracking-wider uppercase text-foreground transition-all duration-700 delay-200 ${textVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                 Conceito
               </h2>
             </div>
             
             <div className="space-y-8 font-mono text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl">
-              <p>
+              <p className={`transition-all duration-700 delay-400 ${textVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                 Nascido do caos urbano e da solidão hiperconectada, <span className="text-accent italic">O Verme Passeia</span> é um refúgio de melancolia e reflexão.
               </p>
               
-              <p>
+              <p className={`transition-all duration-700 delay-500 ${textVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                 Um percurso rastejante por ruínas concretas da existência, onde se encontra beleza na decadência e silêncio no concreto.
               </p>
               
-              <p className="text-foreground italic pt-4">
+              <p className={`text-foreground italic pt-4 transition-all duration-700 delay-700 ${textVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                 O Verme não procura luz. Ele procura sentido.
               </p>
             </div>
