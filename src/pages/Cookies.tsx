@@ -2,17 +2,26 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import SEO from "@/components/SEO";
+import Breadcrumb from "@/components/shared/Breadcrumb";
 
 const Cookies = () => {
+  const publishedTime = "2025-01-01T00:00:00+00:00";
+  const modifiedTime = "2025-01-01T00:00:00+00:00";
+
   return (
     <>
       <SEO 
         title="Política de Cookies | O Verme Passeia"
         description="Saiba como utilizamos cookies para melhorar sua experiência no site O Verme Passeia."
         path="/cookies"
+        type="article"
+        publishedTime={publishedTime}
+        modifiedTime={modifiedTime}
       />
       <div className="min-h-screen bg-background text-foreground">
       <div className="container mx-auto px-4 py-16 max-w-4xl">
+        <Breadcrumb items={[{ label: "Política de Cookies" }]} />
+        
         <Link to="/">
           <Button 
             variant="ghost" 

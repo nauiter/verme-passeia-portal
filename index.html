@@ -36,11 +36,25 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://overmepasseia.lovable.app/" />
     
+    <!-- DNS Prefetch and Preconnect for faster resource loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    
+    <!-- Preload Critical Resources -->
     <link rel="preload" as="image" href="/src/assets/spiral-staircase.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="/og-image.jpg" fetchpriority="high">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;1,300&display=swap" as="style">
+    
+    <!-- Prefetch Secondary Resources -->
+    <link rel="prefetch" as="image" href="/src/assets/dark-tower.webp">
+    <link rel="prefetch" as="image" href="/src/assets/cracked-building.webp">
+    <link rel="prefetch" as="image" href="/src/assets/abandoned-blocks.webp">
+    <link rel="prefetch" as="image" href="/src/assets/brutalist-road.webp">
+    
+    <!-- Font Loading with display=swap for better performance -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"></noscript>
     
