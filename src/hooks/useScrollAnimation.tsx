@@ -41,18 +41,32 @@ export const useScrollAnimation = (
 
 export const useParallax = (speed: number = 0.5) => {
   const [offsetY, setOffsetY] = useState(0);
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   useEffect(() => {
+    // Skip parallax if user prefers reduced motion
+    if (prefersReducedMotion) {
+      return;
+    }
+
+    let ticking = false;
+
     const handleScroll = () => {
-      setOffsetY(window.pageYOffset * speed);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setOffsetY(window.pageYOffset * speed);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [speed]);
+  }, [speed, prefersReducedMotion]);
 
-  return offsetY;
+  return prefersReducedMotion ? 0 : offsetY;
 };
