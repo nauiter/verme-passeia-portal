@@ -36,6 +36,12 @@ const FloatingParticles = () => {
     // Partículas extras para as bordas
     const edgeParticleCount = window.innerWidth < 768 ? 30 : 60;
 
+    // Sistema de vento
+    let windForce = 0;
+    let windDirection = 1; // 1 = direita, -1 = esquerda
+    let windChangeTime = Date.now();
+    const windChangeInterval = 3000 + Math.random() * 4000; // Muda a cada 3-7 segundos
+
     // Create regular soot particles
     for (let i = 0; i < particleCount; i++) {
       // Distribuição: 50% preto, 30% cinza, 20% branco
@@ -120,6 +126,24 @@ const FloatingParticles = () => {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      // Sistema de rajadas de vento
+      const now = Date.now();
+      if (now - windChangeTime > windChangeInterval) {
+        windChangeTime = now;
+        // Rajada ocasional (30% de chance)
+        if (Math.random() < 0.3) {
+          windForce = (Math.random() * 0.8 + 0.4) * (Math.random() < 0.5 ? 1 : -1); // -1.2 a 1.2
+          windDirection = windForce > 0 ? 1 : -1;
+        } else {
+          // Vento calmo
+          windForce = 0;
+        }
+      }
+      
+      // Suavizar transição do vento
+      const targetWindForce = windForce;
+      windForce += (targetWindForce - windForce) * 0.02;
+
       // Desenhar vinheta de fuligem nas bordas - mais visível
       const gradient = ctx.createRadialGradient(
         canvas.width / 2,
@@ -137,8 +161,8 @@ const FloatingParticles = () => {
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((particle) => {
-        // Update position - fuligem cai suavemente
-        particle.x += particle.speedX;
+        // Update position - fuligem cai suavemente + efeito do vento
+        particle.x += particle.speedX + (windForce * 0.5);
         particle.y += particle.speedY;
         particle.rotation += particle.rotationSpeed;
 
