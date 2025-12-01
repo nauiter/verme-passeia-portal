@@ -19,11 +19,23 @@ const FloatingParticles = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    console.log('[FloatingParticles] Componente montado');
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas) {
+      console.error('[FloatingParticles] Canvas não encontrado');
+      return;
+    }
 
     const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    if (!ctx) {
+      console.error('[FloatingParticles] Contexto 2d não disponível');
+      return;
+    }
+
+    console.log('[FloatingParticles] Canvas inicializado:', {
+      width: canvas.width,
+      height: canvas.height
+    });
 
     const setCanvasSize = () => {
       canvas.width = window.innerWidth;
@@ -154,9 +166,34 @@ const FloatingParticles = () => {
 
     let animationFrameId: number;
     let time = 0;
+    let frameCount = 0;
+    let lastLogTime = Date.now();
 
     const animate = () => {
+      frameCount++;
       time += 0.01;
+      
+      // Log a cada 3 segundos para monitorar
+      if (Date.now() - lastLogTime > 3000) {
+        console.log('[FloatingParticles] Status:', {
+          frameCount,
+          particlesTotal: particles.length,
+          canvasSize: { width: canvas.width, height: canvas.height },
+          visibleParticles: particles.filter(p => 
+            p.x >= -10 && p.x <= canvas.width + 10 && 
+            p.y >= -10 && p.y <= canvas.height + 10
+          ).length
+        });
+        lastLogTime = Date.now();
+        frameCount = 0;
+      }
+
+      // Verificar se o canvas ainda existe
+      if (!canvas || !ctx) {
+        console.error('[FloatingParticles] Canvas ou contexto perdido durante animação');
+        return;
+      }
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Sistema de rajadas de vento
@@ -289,9 +326,11 @@ const FloatingParticles = () => {
       animationFrameId = requestAnimationFrame(animate);
     };
 
+    console.log('[FloatingParticles] Iniciando animação com', particles.length, 'partículas');
     animate();
 
     return () => {
+      console.log('[FloatingParticles] Componente desmontado - limpando recursos');
       window.removeEventListener('resize', setCanvasSize);
       window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(animationFrameId);
