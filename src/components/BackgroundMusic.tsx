@@ -21,18 +21,15 @@ const BackgroundMusic = () => {
     const tryAutoplay = async () => {
       try {
         await audio.play();
-        console.log("Audio autoplay started");
       } catch (error) {
-        console.log("Autoplay blocked by browser, waiting for user interaction");
         // Fallback: play on first user interaction if autoplay is blocked
         const handleInteraction = async () => {
           if (!hasInteractedRef.current) {
             hasInteractedRef.current = true;
             try {
               await audio.play();
-              console.log("Audio started after user interaction");
             } catch (err) {
-              console.error("Playback failed:", err);
+              // Silent fail
             }
           }
         };
