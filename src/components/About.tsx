@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import darkTower from "@/assets/dark-tower.webp";
-import { useScrollAnimation, useParallax } from "@/hooks/useScrollAnimation";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const About = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -9,7 +9,6 @@ const About = () => {
   const isVisible = useScrollAnimation(sectionRef, { threshold: 0.2 });
   const textVisible = useScrollAnimation(textRef, { threshold: 0.3 });
   const imageVisible = useScrollAnimation(imageRef, { threshold: 0.3 });
-  const parallaxOffset = useParallax(0.2);
 
   return (
     <section 
@@ -24,7 +23,6 @@ const About = () => {
             className={`space-y-12 transition-all duration-1000 delay-100 ${
               textVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
             }`}
-            style={{ transform: `translateY(${parallaxOffset * 0.5}px)` }}
           >
             <div>
               <div className="w-16 h-px bg-accent mb-8"></div>
@@ -54,7 +52,6 @@ const About = () => {
             className={`relative order-first md:order-last transition-all duration-1000 delay-300 ${
               imageVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
             }`}
-            style={{ transform: `translateY(${parallaxOffset * 0.8}px)` }}
           >
             <div className="relative overflow-hidden">
               <img 

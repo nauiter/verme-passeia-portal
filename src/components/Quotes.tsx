@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import crackedBuilding from "@/assets/cracked-building.webp";
-import { useScrollAnimation, useParallax } from "@/hooks/useScrollAnimation";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const quotes = [
   "Há beleza no que não quer ser visto.",
@@ -12,7 +12,6 @@ const Quotes = () => {
   const [currentQuote, setCurrentQuote] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
   const isVisible = useScrollAnimation(sectionRef, { threshold: 0.2 });
-  const parallaxOffset = useParallax(0.3);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -28,10 +27,9 @@ const Quotes = () => {
     >
       {/* Background Image with Overlay */}
       <div 
-        className="absolute inset-0 bg-cover bg-center opacity-30 transition-transform duration-700"
+        className="absolute inset-0 bg-cover bg-center opacity-30"
         style={{ 
           backgroundImage: `url(${crackedBuilding})`,
-          transform: `translateY(${parallaxOffset}px)`,
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-t from-card via-card/70 to-card/30"></div>

@@ -2,14 +2,13 @@ import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Download as DownloadIcon } from "lucide-react";
 import abandonedBlocks from "@/assets/abandoned-blocks.webp";
-import { useScrollAnimation, useParallax } from "@/hooks/useScrollAnimation";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Download = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const isVisible = useScrollAnimation(sectionRef, { threshold: 0.2 });
   const contentVisible = useScrollAnimation(contentRef, { threshold: 0.3 });
-  const parallaxOffset = useParallax(0.4);
 
   return (
     <section 
@@ -18,10 +17,9 @@ const Download = () => {
     >
       {/* Background */}
       <div 
-        className="absolute inset-0 bg-cover bg-center opacity-20 transition-transform duration-700"
+        className="absolute inset-0 bg-cover bg-center opacity-20"
         style={{ 
           backgroundImage: `url(${abandonedBlocks})`,
-          transform: `translateY(${parallaxOffset}px)`,
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-br from-card via-background to-card"></div>
