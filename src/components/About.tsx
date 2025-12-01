@@ -1,12 +1,31 @@
+import { useRef } from "react";
 import darkTower from "@/assets/dark-tower.webp";
+import { useScrollAnimation, useParallax } from "@/hooks/useScrollAnimation";
 
 const About = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const isVisible = useScrollAnimation(sectionRef, { threshold: 0.2 });
+  const textVisible = useScrollAnimation(textRef, { threshold: 0.3 });
+  const imageVisible = useScrollAnimation(imageRef, { threshold: 0.3 });
+  const parallaxOffset = useParallax(0.2);
+
   return (
-    <section className="relative min-h-screen flex items-center py-20 md:py-32 overflow-hidden bg-background">
+    <section 
+      ref={sectionRef}
+      className="relative min-h-screen flex items-center py-20 md:py-32 overflow-hidden bg-background"
+    >
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-16 lg:gap-24 items-center max-w-7xl mx-auto">
           {/* Text Content */}
-          <div className="space-y-12 animate-fade-in">
+          <div 
+            ref={textRef}
+            className={`space-y-12 transition-all duration-1000 delay-100 ${
+              textVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
+            }`}
+            style={{ transform: `translateY(${parallaxOffset * 0.5}px)` }}
+          >
             <div>
               <div className="w-16 h-px bg-accent mb-8"></div>
               <h2 className="font-sans text-4xl md:text-5xl lg:text-6xl font-bold tracking-wider uppercase text-foreground">
@@ -30,7 +49,13 @@ const About = () => {
           </div>
           
           {/* Image */}
-          <div className="relative animate-fade-in order-first md:order-last">
+          <div 
+            ref={imageRef}
+            className={`relative order-first md:order-last transition-all duration-1000 delay-300 ${
+              imageVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
+            }`}
+            style={{ transform: `translateY(${parallaxOffset * 0.8}px)` }}
+          >
             <div className="relative overflow-hidden">
               <img 
                 src={darkTower} 

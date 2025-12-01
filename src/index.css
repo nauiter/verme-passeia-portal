@@ -114,6 +114,11 @@ All colors MUST be HSL.
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+  
+  /* Custom color variables */
+  .void {
+    background-color: hsl(var(--void));
+  }
 }
 
 @layer base {

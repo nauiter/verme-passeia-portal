@@ -1,5 +1,7 @@
+import { useRef } from "react";
 import { Youtube, Twitter, Linkedin, ExternalLink, Instagram, Facebook } from "lucide-react";
 import brutalistRoad from "@/assets/brutalist-road.webp";
+import { useScrollAnimation, useParallax } from "@/hooks/useScrollAnimation";
 
 const socialLinks = [
   {
@@ -41,18 +43,35 @@ const socialLinks = [
 ];
 
 const Community = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const isVisible = useScrollAnimation(sectionRef, { threshold: 0.2 });
+  const contentVisible = useScrollAnimation(contentRef, { threshold: 0.3 });
+  const parallaxOffset = useParallax(0.25);
+
   return (
-    <section className="relative min-h-screen flex items-center py-20 md:py-32 overflow-hidden bg-card">
+    <section 
+      ref={sectionRef}
+      className="relative min-h-screen flex items-center py-20 md:py-32 overflow-hidden bg-card"
+    >
       {/* Background */}
       <div 
-        className="absolute inset-0 bg-cover bg-center opacity-25"
-        style={{ backgroundImage: `url(${brutalistRoad})` }}
+        className="absolute inset-0 bg-cover bg-center opacity-25 transition-transform duration-700"
+        style={{ 
+          backgroundImage: `url(${brutalistRoad})`,
+          transform: `translateY(${parallaxOffset}px)`,
+        }}
       >
         <div className="absolute inset-0 bg-gradient-to-t from-card via-card/90 to-card/40"></div>
       </div>
       
       <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-5xl mx-auto text-center space-y-16 animate-fade-in">
+        <div 
+          ref={contentRef}
+          className={`max-w-5xl mx-auto text-center space-y-16 transition-all duration-1000 ${
+            contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+          }`}
+        >
           {/* Title */}
           <div>
             <h2 className="font-sans text-3xl md:text-4xl lg:text-5xl font-bold tracking-[0.15em] uppercase text-foreground mb-8">

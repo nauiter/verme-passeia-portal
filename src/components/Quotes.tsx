@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import crackedBuilding from "@/assets/cracked-building.webp";
+import { useScrollAnimation, useParallax } from "@/hooks/useScrollAnimation";
 
 const quotes = [
   "Há beleza no que não quer ser visto.",
@@ -9,6 +10,9 @@ const quotes = [
 
 const Quotes = () => {
   const [currentQuote, setCurrentQuote] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const isVisible = useScrollAnimation(sectionRef, { threshold: 0.2 });
+  const parallaxOffset = useParallax(0.3);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -18,17 +22,27 @@ const Quotes = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-card py-20 md:py-32">
+    <section 
+      ref={sectionRef}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-card py-20 md:py-32"
+    >
       {/* Background Image with Overlay */}
       <div 
-        className="absolute inset-0 bg-cover bg-center opacity-30"
-        style={{ backgroundImage: `url(${crackedBuilding})` }}
+        className="absolute inset-0 bg-cover bg-center opacity-30 transition-transform duration-700"
+        style={{ 
+          backgroundImage: `url(${crackedBuilding})`,
+          transform: `translateY(${parallaxOffset}px)`,
+        }}
       >
         <div className="absolute inset-0 bg-gradient-to-t from-card via-card/70 to-card/30"></div>
       </div>
       
       {/* Quote Content */}
-      <div className="relative z-10 px-6 max-w-4xl mx-auto text-center">
+      <div 
+        className={`relative z-10 px-6 max-w-4xl mx-auto text-center transition-all duration-1000 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+        }`}
+      >
         {quotes.map((quote, index) => (
           <blockquote
             key={index}
