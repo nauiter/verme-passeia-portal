@@ -1,7 +1,20 @@
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
+
 const Terms = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <div className="container mx-auto px-4 py-16 max-w-4xl">
+        <Link to="/">
+          <Button 
+            variant="ghost" 
+            className="mb-6 hover:bg-secondary"
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Voltar para Home
+          </Button>
+        </Link>
         <h1 className="text-4xl font-bold mb-8">Termos de Uso</h1>
         
         <section className="space-y-6 text-foreground/80">
