@@ -10,6 +10,7 @@ interface Particle {
   rotation: number;
   rotationSpeed: number;
   colorType: 'black' | 'gray' | 'white';
+  depth: number; // 0.3 (distante) a 1.0 (próximo) - para efeito parallax
 }
 
 const FloatingParticles = () => {
@@ -55,19 +56,22 @@ const FloatingParticles = () => {
         colorType = 'white';
       }
 
-      const size = Math.random() * 4.5 + 0.2; // Variação ampla: poeira fina (0.2) até flocos grandes (4.7)
-      const speedY = (size / 5) * 0.4 + Math.random() * 0.15; // Maiores caem mais rápido
+      const depth = Math.random() * 0.7 + 0.3; // 0.3 (longe) a 1.0 (perto)
+      const baseSize = Math.random() * 4.5 + 0.2;
+      const size = baseSize * depth; // Partículas próximas são maiores
+      const speedY = ((size / 5) * 0.4 + Math.random() * 0.15) * depth; // Mais próximas caem mais rápido
 
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         size,
-        speedX: (Math.random() - 0.5) * 0.2,
+        speedX: (Math.random() - 0.5) * 0.2 * depth,
         speedY,
-        opacity: Math.random() * 0.45 + 0.15, // Opacidade aumentada
+        opacity: (Math.random() * 0.45 + 0.15) * depth, // Mais próximas são mais opacas
         rotation: Math.random() * Math.PI * 2,
         rotationSpeed: (Math.random() - 0.5) * 0.015,
         colorType,
+        depth,
       });
     }
 
@@ -105,19 +109,22 @@ const FloatingParticles = () => {
         colorType = 'white';
       }
 
-      const size = Math.random() * 5 + 0.8; // Maiores nas bordas: de 0.8 até 5.8
-      const speedY = (size / 6) * 0.35 + Math.random() * 0.1; // Física: maiores caem mais rápido
+      const depth = Math.random() * 0.7 + 0.3; // 0.3 (longe) a 1.0 (perto)
+      const baseSize = Math.random() * 5 + 0.8;
+      const size = baseSize * depth; // Partículas próximas são maiores
+      const speedY = ((size / 6) * 0.35 + Math.random() * 0.1) * depth; // Física com parallax
 
       particles.push({
         x,
         y,
         size,
-        speedX: (Math.random() - 0.5) * 0.1,
+        speedX: (Math.random() - 0.5) * 0.1 * depth,
         speedY,
-        opacity: Math.random() * 0.5 + 0.2, // Mais opacas nas bordas
+        opacity: (Math.random() * 0.5 + 0.2) * depth, // Mais próximas são mais opacas
         rotation: Math.random() * Math.PI * 2,
         rotationSpeed: (Math.random() - 0.5) * 0.01,
         colorType,
+        depth,
       });
     }
 
@@ -161,8 +168,8 @@ const FloatingParticles = () => {
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((particle) => {
-        // Update position - fuligem cai suavemente + efeito do vento
-        particle.x += particle.speedX + (windForce * 0.5);
+        // Update position - fuligem cai suavemente + efeito do vento com parallax
+        particle.x += particle.speedX + (windForce * 0.5 * particle.depth); // Vento afeta mais as próximas
         particle.y += particle.speedY;
         particle.rotation += particle.rotationSpeed;
 
