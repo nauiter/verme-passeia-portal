@@ -8,7 +8,7 @@ const reflections = [
   },
   {
     title: "Lucidez",
-    text: "Ver o mundo como ele é — frio, indiferente, belo em sua crueldade — não é desesperança. É aceitação. É liberdade.",
+    text: "Ver o mundo como ele é, frio, indiferente, belo em sua crueldade, não é desesperança. É aceitação. É liberdade.",
   },
   {
     title: "Rastejo",
