@@ -17,6 +17,7 @@ const Manifestos = () => {
     <section
       ref={sectionRef}
       className="relative min-h-screen flex items-center py-20 md:py-32 px-4 sm:px-6 overflow-hidden bg-card before:absolute before:top-0 before:left-0 before:right-0 before:h-32 before:bg-gradient-to-b before:from-background before:to-transparent before:z-10 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-32 after:bg-gradient-to-t after:from-background after:to-transparent after:z-10"
+      aria-label="Manifestos filosóficos"
     >
       <div className="container mx-auto relative z-10">
         <div className="max-w-5xl mx-auto">

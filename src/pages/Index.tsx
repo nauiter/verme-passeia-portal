@@ -21,7 +21,7 @@ const Index = () => {
     <>
       <SEO />
       <FloatingParticles />
-      <main className="min-h-screen relative">
+      <main className="min-h-screen relative" role="main">
         <BackgroundMusic />
         <Hero />
         <Suspense fallback={<LoadingSkeleton />}>
