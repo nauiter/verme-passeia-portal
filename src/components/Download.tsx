@@ -1,20 +1,39 @@
+import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Download as DownloadIcon } from "lucide-react";
 import abandonedBlocks from "@/assets/abandoned-blocks.webp";
+import { useScrollAnimation, useParallax } from "@/hooks/useScrollAnimation";
 
 const Download = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const isVisible = useScrollAnimation(sectionRef, { threshold: 0.2 });
+  const contentVisible = useScrollAnimation(contentRef, { threshold: 0.3 });
+  const parallaxOffset = useParallax(0.4);
+
   return (
-    <section className="relative min-h-screen flex items-center py-20 md:py-32 overflow-hidden">
+    <section 
+      ref={sectionRef}
+      className="relative min-h-screen flex items-center py-20 md:py-32 overflow-hidden"
+    >
       {/* Background */}
       <div 
-        className="absolute inset-0 bg-cover bg-center opacity-20"
-        style={{ backgroundImage: `url(${abandonedBlocks})` }}
+        className="absolute inset-0 bg-cover bg-center opacity-20 transition-transform duration-700"
+        style={{ 
+          backgroundImage: `url(${abandonedBlocks})`,
+          transform: `translateY(${parallaxOffset}px)`,
+        }}
       >
         <div className="absolute inset-0 bg-gradient-to-br from-card via-background to-card"></div>
       </div>
       
       <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-3xl mx-auto text-center space-y-16 animate-fade-in">
+        <div 
+          ref={contentRef}
+          className={`max-w-3xl mx-auto text-center space-y-16 transition-all duration-1000 ${
+            contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+          }`}
+        >
           {/* Title */}
           <div>
             <h2 className="font-sans text-4xl md:text-5xl lg:text-6xl font-bold tracking-[0.15em] uppercase text-foreground mb-8">
