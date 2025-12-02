@@ -46,10 +46,10 @@ const FloatingParticles = () => {
     window.addEventListener('resize', setCanvasSize);
 
     const particles: Particle[] = [];
-    // Densidade otimizada para não prejudicar legibilidade
-    const particleCount = window.innerWidth < 768 ? 50 : 100;
-    // Partículas extras para as bordas
-    const edgeParticleCount = window.innerWidth < 768 ? 30 : 60;
+    // Densidade aumentada para maior intensidade atmosférica
+    const particleCount = window.innerWidth < 768 ? 120 : 200;
+    // Partículas extras para as bordas - mais densas
+    const edgeParticleCount = window.innerWidth < 768 ? 80 : 150;
 
     // Sistema de vento
     let windForce = 0;
@@ -89,17 +89,17 @@ const FloatingParticles = () => {
       }
 
       const depth = Math.random() * 0.7 + 0.3; // 0.3 (longe) a 1.0 (perto)
-      const baseSize = Math.random() * 4.5 + 0.2;
+      const baseSize = Math.random() * 6.5 + 0.5;
       const size = baseSize * depth; // Partículas próximas são maiores
-      const speedY = ((size / 5) * 0.4 + Math.random() * 0.15) * depth; // Mais próximas caem mais rápido
+      const speedY = ((size / 4) * 0.6 + Math.random() * 0.25) * depth; // Mais rápidas
 
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         size,
-        speedX: (Math.random() - 0.5) * 0.2 * depth,
+        speedX: (Math.random() - 0.5) * 0.35 * depth,
         speedY,
-        opacity: (Math.random() * 0.45 + 0.15) * depth, // Mais próximas são mais opacas
+        opacity: (Math.random() * 0.6 + 0.25) * depth, // Mais opacas
         rotation: Math.random() * Math.PI * 2,
         rotationSpeed: (Math.random() - 0.5) * 0.015,
         colorType,
@@ -144,17 +144,17 @@ const FloatingParticles = () => {
       }
 
       const depth = Math.random() * 0.7 + 0.3; // 0.3 (longe) a 1.0 (perto)
-      const baseSize = Math.random() * 5 + 0.8;
+      const baseSize = Math.random() * 7 + 1.2;
       const size = baseSize * depth; // Partículas próximas são maiores
-      const speedY = ((size / 6) * 0.35 + Math.random() * 0.1) * depth; // Física com parallax
+      const speedY = ((size / 5) * 0.5 + Math.random() * 0.2) * depth; // Mais rápidas
 
       particles.push({
         x,
         y,
         size,
-        speedX: (Math.random() - 0.5) * 0.1 * depth,
+        speedX: (Math.random() - 0.5) * 0.2 * depth,
         speedY,
-        opacity: (Math.random() * 0.5 + 0.2) * depth, // Mais próximas são mais opacas
+        opacity: (Math.random() * 0.65 + 0.3) * depth, // Mais opacas
         rotation: Math.random() * Math.PI * 2,
         rotationSpeed: (Math.random() - 0.5) * 0.01,
         colorType,
@@ -259,8 +259,8 @@ const FloatingParticles = () => {
         Math.max(canvas.width, canvas.height) * 0.7
       );
       gradient.addColorStop(0, 'rgba(0, 0, 0, 0)');
-      gradient.addColorStop(0.7, 'rgba(20, 20, 20, 0.08)');
-      gradient.addColorStop(1, 'rgba(15, 15, 15, 0.2)');
+      gradient.addColorStop(0.6, 'rgba(20, 20, 20, 0.15)');
+      gradient.addColorStop(1, 'rgba(15, 15, 15, 0.35)');
       
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -374,7 +374,7 @@ const FloatingParticles = () => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none"
-      style={{ mixBlendMode: 'normal', opacity: 0.7, zIndex: 99999 }}
+      style={{ mixBlendMode: 'normal', opacity: 0.85, zIndex: 99999 }}
       aria-hidden="true"
     />
   );
