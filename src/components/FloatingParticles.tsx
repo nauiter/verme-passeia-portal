@@ -9,7 +9,7 @@ interface Particle {
   opacity: number;
   rotation: number;
   rotationSpeed: number;
-  colorType: 'black' | 'gray' | 'white';
+  colorType: 'black' | 'darkGray' | 'gray' | 'lightGray' | 'brown' | 'darkBrown' | 'ash' | 'white';
   depth: number; // 0.3 (distante) a 1.0 (próximo) - para efeito parallax
   noiseOffsetX: number; // Offset para turbulência
   noiseOffsetY: number;
@@ -77,13 +77,23 @@ const FloatingParticles = () => {
 
     // Create regular soot particles
     for (let i = 0; i < particleCount; i++) {
-      // Distribuição: 50% preto, 30% cinza, 20% branco
+      // Distribuição realista de fuligem: pretos, cinzas, marrons e brancos
       const rand = Math.random();
-      let colorType: 'black' | 'gray' | 'white';
-      if (rand < 0.5) {
+      let colorType: 'black' | 'darkGray' | 'gray' | 'lightGray' | 'brown' | 'darkBrown' | 'ash' | 'white';
+      if (rand < 0.25) {
         colorType = 'black';
-      } else if (rand < 0.8) {
+      } else if (rand < 0.40) {
+        colorType = 'darkGray';
+      } else if (rand < 0.55) {
         colorType = 'gray';
+      } else if (rand < 0.65) {
+        colorType = 'lightGray';
+      } else if (rand < 0.78) {
+        colorType = 'brown';
+      } else if (rand < 0.88) {
+        colorType = 'darkBrown';
+      } else if (rand < 0.95) {
+        colorType = 'ash';
       } else {
         colorType = 'white';
       }
@@ -132,15 +142,21 @@ const FloatingParticles = () => {
           y = Math.random() * canvas.height;
       }
 
-      // Partículas das bordas são mais escuras e maiores
+      // Partículas das bordas são mais escuras - tons de fuligem queimada
       const rand = Math.random();
-      let colorType: 'black' | 'gray' | 'white';
-      if (rand < 0.7) {
+      let colorType: 'black' | 'darkGray' | 'gray' | 'lightGray' | 'brown' | 'darkBrown' | 'ash' | 'white';
+      if (rand < 0.35) {
         colorType = 'black';
-      } else if (rand < 0.9) {
-        colorType = 'gray';
+      } else if (rand < 0.50) {
+        colorType = 'darkBrown';
+      } else if (rand < 0.65) {
+        colorType = 'darkGray';
+      } else if (rand < 0.80) {
+        colorType = 'brown';
+      } else if (rand < 0.90) {
+        colorType = 'ash';
       } else {
-        colorType = 'white';
+        colorType = 'gray';
       }
 
       const depth = Math.random() * 0.7 + 0.3; // 0.3 (longe) a 1.0 (perto)
@@ -330,18 +346,53 @@ const FloatingParticles = () => {
           ctx.filter = `blur(${blurAmount}px)`;
         }
 
-        // Cor de fuligem baseada no tipo - opacidades aumentadas para visibilidade
+        // Cor de fuligem baseada no tipo - paleta realista de fuligem e cinzas
         let fillStyle: string;
-        if (particle.colorType === 'black') {
-          const grayValue = Math.floor(Math.random() * 25 + 10); // 10-35 (preto/cinza escuro)
-          fillStyle = `rgba(${grayValue}, ${grayValue}, ${grayValue}, ${particle.opacity * 0.85})`;
-        } else if (particle.colorType === 'gray') {
-          const grayValue = Math.floor(Math.random() * 70 + 110); // 110-180 (cinza médio)
-          fillStyle = `rgba(${grayValue}, ${grayValue}, ${grayValue}, ${particle.opacity * 0.75})`;
-        } else {
-          // white
-          const whiteValue = Math.floor(Math.random() * 35 + 220); // 220-255 (branco/cinza claro)
-          fillStyle = `rgba(${whiteValue}, ${whiteValue}, ${whiteValue}, ${particle.opacity * 0.65})`;
+        const baseOpacity = particle.opacity;
+        
+        switch (particle.colorType) {
+          case 'black':
+            const blackVal = Math.floor(Math.random() * 20 + 5); // 5-25
+            fillStyle = `rgba(${blackVal}, ${blackVal}, ${blackVal}, ${baseOpacity * 0.9})`;
+            break;
+          case 'darkGray':
+            const darkGrayVal = Math.floor(Math.random() * 30 + 35); // 35-65
+            fillStyle = `rgba(${darkGrayVal}, ${darkGrayVal}, ${darkGrayVal}, ${baseOpacity * 0.85})`;
+            break;
+          case 'gray':
+            const grayVal = Math.floor(Math.random() * 40 + 90); // 90-130
+            fillStyle = `rgba(${grayVal}, ${grayVal}, ${grayVal}, ${baseOpacity * 0.8})`;
+            break;
+          case 'lightGray':
+            const lightGrayVal = Math.floor(Math.random() * 40 + 150); // 150-190
+            fillStyle = `rgba(${lightGrayVal}, ${lightGrayVal}, ${lightGrayVal}, ${baseOpacity * 0.7})`;
+            break;
+          case 'brown':
+            // Marrom fuligem - tons terrosos
+            const brownR = Math.floor(Math.random() * 30 + 60); // 60-90
+            const brownG = Math.floor(Math.random() * 20 + 40); // 40-60
+            const brownB = Math.floor(Math.random() * 15 + 25); // 25-40
+            fillStyle = `rgba(${brownR}, ${brownG}, ${brownB}, ${baseOpacity * 0.85})`;
+            break;
+          case 'darkBrown':
+            // Marrom escuro queimado
+            const dBrownR = Math.floor(Math.random() * 25 + 35); // 35-60
+            const dBrownG = Math.floor(Math.random() * 15 + 20); // 20-35
+            const dBrownB = Math.floor(Math.random() * 10 + 10); // 10-20
+            fillStyle = `rgba(${dBrownR}, ${dBrownG}, ${dBrownB}, ${baseOpacity * 0.9})`;
+            break;
+          case 'ash':
+            // Cinza amarelado/bege - como cinzas reais
+            const ashR = Math.floor(Math.random() * 30 + 130); // 130-160
+            const ashG = Math.floor(Math.random() * 25 + 120); // 120-145
+            const ashB = Math.floor(Math.random() * 20 + 100); // 100-120
+            fillStyle = `rgba(${ashR}, ${ashG}, ${ashB}, ${baseOpacity * 0.75})`;
+            break;
+          case 'white':
+          default:
+            const whiteVal = Math.floor(Math.random() * 30 + 210); // 210-240
+            fillStyle = `rgba(${whiteVal}, ${whiteVal}, ${whiteVal}, ${baseOpacity * 0.6})`;
+            break;
         }
         
         ctx.fillStyle = fillStyle;
