@@ -213,13 +213,13 @@ const FloatingParticles = () => {
     let lastFrameTime = Date.now();
     let isHealthy = true;
 
-    // Sistema de health check e auto-recuperação
+    // Sistema de health check e auto-recuperação - threshold aumentado para evitar falsos positivos
     const healthCheck = () => {
       const now = Date.now();
       const timeSinceLastFrame = now - lastFrameTime;
       
-      // Se não houver frames por mais de 100ms, há um problema
-      if (timeSinceLastFrame > 100 && isHealthy) {
+      // Se não houver frames por mais de 2 segundos, há um problema real
+      if (timeSinceLastFrame > 2000 && isHealthy) {
         console.warn('[FloatingParticles] Sistema pausado detectado. Tentando recuperar...');
         isHealthy = false;
         
@@ -236,14 +236,14 @@ const FloatingParticles = () => {
         } else {
           console.error('[FloatingParticles] Canvas inválido. Não é possível recuperar.');
         }
-      } else if (timeSinceLastFrame <= 100 && !isHealthy) {
+      } else if (timeSinceLastFrame <= 500 && !isHealthy) {
         console.log('[FloatingParticles] Sistema recuperado com sucesso!');
         isHealthy = true;
       }
     };
 
-    // Executar health check a cada 200ms
-    const healthCheckInterval = setInterval(healthCheck, 200);
+    // Executar health check a cada 3 segundos (menos intrusivo)
+    const healthCheckInterval = setInterval(healthCheck, 3000);
 
     const animate = () => {
       lastFrameTime = Date.now();
