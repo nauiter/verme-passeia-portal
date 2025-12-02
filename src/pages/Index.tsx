@@ -7,6 +7,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import LoadingSkeleton from "@/components/LoadingSkeleton";
 import SEO from "@/components/SEO";
 import FloatingParticles from "@/components/FloatingParticles";
+import JoinSection from "@/components/JoinSection";
 
 // Lazy load components below the fold
 const Quotes = lazy(() => import("@/components/Quotes"));
@@ -32,6 +33,7 @@ const Index = () => {
           <Download />
           <Community />
         </Suspense>
+        <JoinSection />
         <FooterNauiterMaster />
         <CookieBanner />
         <ScrollToTop />
