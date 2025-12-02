@@ -135,18 +135,15 @@ const Community = () => {
           </div>
           
           {/* Footer Quote & Partnership CTA */}
-          <div className={`pt-8 space-y-4 border border-border/40 p-8 sm:p-10 bg-background/20 transition-all duration-700 delay-1000 ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+          <div className={`space-y-6 border border-border p-6 sm:p-8 bg-background/40 backdrop-blur-sm transition-all duration-700 delay-1000 ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             <p className="font-mono text-sm sm:text-base md:text-lg italic text-foreground">
               "O Verme não procura luz. Ele procura sentido."
-            </p>
-            <p className="font-mono text-xs sm:text-sm text-foreground/80">
-              Os vermes se unem no lixo da vida.
             </p>
             <a
               href="https://forms.gle/W5eLQxFcyWpE4HQ1A"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-accent/50 hover:border-accent bg-background/30 hover:bg-accent/10 text-foreground hover:text-accent font-sans text-xs sm:text-sm tracking-widest uppercase transition-all duration-300 hover:shadow-lg hover:shadow-accent/20"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-border hover:border-accent bg-background/40 hover:bg-background/80 text-foreground hover:text-accent font-sans text-xs sm:text-sm tracking-widest uppercase transition-all duration-300 hover:shadow-lg hover:shadow-accent/20"
             >
               <ExternalLink className="h-4 w-4" />
               Seja um parceiro do Verme
