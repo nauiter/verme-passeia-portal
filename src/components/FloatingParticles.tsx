@@ -9,7 +9,8 @@ interface Particle {
   opacity: number;
   rotation: number;
   rotationSpeed: number;
-  colorType: 'black' | 'darkGray' | 'gray' | 'lightGray' | 'brown' | 'darkBrown' | 'ash' | 'white';
+  colorType: 'black' | 'darkGray' | 'gray' | 'lightGray' | 'brown' | 'darkBrown' | 'ash' | 'white' | 'ember';
+  isEmber?: boolean; // Para partículas de brasa com brilho
   depth: number; // 0.3 (distante) a 1.0 (próximo) - para efeito parallax
   noiseOffsetX: number; // Offset para turbulência
   noiseOffsetY: number;
@@ -46,10 +47,12 @@ const FloatingParticles = () => {
     window.addEventListener('resize', setCanvasSize);
 
     const particles: Particle[] = [];
-    // Densidade aumentada para maior intensidade atmosférica
-    const particleCount = window.innerWidth < 768 ? 120 : 200;
-    // Partículas extras para as bordas - mais densas
-    const edgeParticleCount = window.innerWidth < 768 ? 80 : 150;
+    // Densidade reduzida em 25%
+    const particleCount = window.innerWidth < 768 ? 90 : 150;
+    // Partículas extras para as bordas - reduzidas 25%
+    const edgeParticleCount = window.innerWidth < 768 ? 60 : 112;
+    // Brasas flutuantes - poucas para efeito sutil
+    const emberCount = window.innerWidth < 768 ? 8 : 15;
 
     // Sistema de vento
     let windForce = 0;
@@ -177,6 +180,29 @@ const FloatingParticles = () => {
         depth,
         noiseOffsetX: Math.random() * 1000,
         noiseOffsetY: Math.random() * 1000,
+      });
+    }
+
+    // Create ember particles - brasas flutuantes com brilho
+    for (let i = 0; i < emberCount; i++) {
+      const depth = Math.random() * 0.5 + 0.5; // 0.5-1.0 (mais próximas para serem visíveis)
+      const baseSize = Math.random() * 2.5 + 0.8; // Menores que fuligem
+      const size = baseSize * depth;
+      
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size,
+        speedX: (Math.random() - 0.5) * 0.4 * depth,
+        speedY: -((Math.random() * 0.3 + 0.15) * depth), // Sobem levemente (ar quente)
+        opacity: (Math.random() * 0.5 + 0.4) * depth,
+        rotation: Math.random() * Math.PI * 2,
+        rotationSpeed: (Math.random() - 0.5) * 0.02,
+        colorType: 'ember',
+        depth,
+        noiseOffsetX: Math.random() * 1000,
+        noiseOffsetY: Math.random() * 1000,
+        isEmber: true,
       });
     }
 
@@ -388,6 +414,18 @@ const FloatingParticles = () => {
             const ashB = Math.floor(Math.random() * 20 + 100); // 100-120
             fillStyle = `rgba(${ashR}, ${ashG}, ${ashB}, ${baseOpacity * 0.75})`;
             break;
+          case 'ember':
+            // Brasa com brilho alaranjado pulsante
+            const emberPulse = Math.sin(time * 3 + particle.noiseOffsetX) * 0.3 + 0.7; // Pulsação
+            const emberR = Math.floor(Math.random() * 40 + 200); // 200-240
+            const emberG = Math.floor(Math.random() * 50 + 80); // 80-130
+            const emberB = Math.floor(Math.random() * 30 + 10); // 10-40
+            fillStyle = `rgba(${emberR}, ${emberG}, ${emberB}, ${baseOpacity * emberPulse})`;
+            
+            // Adiciona glow para brasas
+            ctx.shadowColor = `rgba(255, 120, 30, ${baseOpacity * 0.6 * emberPulse})`;
+            ctx.shadowBlur = particle.size * 4;
+            break;
           case 'white':
           default:
             const whiteVal = Math.floor(Math.random() * 30 + 210); // 210-240
@@ -401,8 +439,10 @@ const FloatingParticles = () => {
         const shapeIndex = Math.abs(Math.floor(particle.noiseOffsetX * 3) % 3);
         drawSootShape(particle, shapeIndex);
 
-        // Reset filter
+        // Reset filter e shadow
         ctx.filter = 'none';
+        ctx.shadowColor = 'transparent';
+        ctx.shadowBlur = 0;
         ctx.restore();
       });
 
