@@ -47,12 +47,12 @@ const FloatingParticles = () => {
     window.addEventListener('resize', setCanvasSize);
 
     const particles: Particle[] = [];
-    // Densidade reduzida em 25%
-    const particleCount = window.innerWidth < 768 ? 90 : 150;
-    // Partículas extras para as bordas - reduzidas 25%
-    const edgeParticleCount = window.innerWidth < 768 ? 60 : 112;
+    // Densidade reduzida para efeito mais sutil
+    const particleCount = window.innerWidth < 768 ? 45 : 80;
+    // Partículas extras para as bordas
+    const edgeParticleCount = window.innerWidth < 768 ? 30 : 55;
     // Brasas flutuantes - poucas para efeito sutil
-    const emberCount = window.innerWidth < 768 ? 8 : 15;
+    const emberCount = window.innerWidth < 768 ? 4 : 8;
 
     // Sistema de vento
     let windForce = 0;
