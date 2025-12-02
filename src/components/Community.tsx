@@ -134,23 +134,21 @@ const Community = () => {
             })}
           </div>
           
-          {/* Footer Quote */}
-          <p className={`font-mono text-xs sm:text-sm md:text-base italic text-muted-foreground/80 pt-6 sm:pt-8 px-4 transition-all duration-700 delay-1000 ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-            "O Verme não procura luz. Ele procura sentido."
-          </p>
-          
-          {/* Partnership CTA */}
-          <div className={`pt-6 space-y-4 transition-all duration-700 delay-1200 ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-            <p className="font-mono text-xs sm:text-sm text-muted-foreground/70">
+          {/* Footer Quote & Partnership CTA */}
+          <div className={`pt-8 space-y-3 transition-all duration-700 delay-1000 ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+            <p className="font-mono text-xs sm:text-sm md:text-base italic text-muted-foreground/80">
+              "O Verme não procura luz. Ele procura sentido."
+            </p>
+            <p className="font-mono text-[10px] sm:text-xs text-muted-foreground/60">
               Os vermes se unem no lixo da vida.
             </p>
             <a
               href="https://forms.gle/W5eLQxFcyWpE4HQ1A"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-accent/60 hover:border-accent bg-background/40 hover:bg-accent/10 text-foreground hover:text-accent font-sans text-xs sm:text-sm tracking-widest uppercase transition-all duration-300 hover:shadow-lg hover:shadow-accent/20"
+              className="inline-flex items-center gap-2 px-5 py-2.5 border border-accent/50 hover:border-accent bg-background/30 hover:bg-accent/10 text-foreground/90 hover:text-accent font-sans text-[10px] sm:text-xs tracking-widest uppercase transition-all duration-300 hover:shadow-lg hover:shadow-accent/20"
             >
-              <ExternalLink className="h-4 w-4" />
+              <ExternalLink className="h-3.5 w-3.5" />
               Seja um parceiro do Verme
             </a>
           </div>
