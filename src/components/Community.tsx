@@ -68,7 +68,7 @@ const Community = () => {
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div 
           ref={contentRef}
-          className={`max-w-5xl mx-auto text-center space-y-12 sm:space-y-16 transition-all duration-1000 ${
+          className={`max-w-5xl mx-auto text-center space-y-10 transition-all duration-1000 ${
             contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
           }`}
         >
@@ -81,7 +81,7 @@ const Community = () => {
           </div>
           
           {/* Social Links Grid */}
-          <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 transition-all duration-1000 delay-400 ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+          <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-1000 delay-400 ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             {socialLinks.map((link, idx) => {
               const Icon = link.icon;
               return (
