@@ -366,12 +366,6 @@ const FloatingParticles = () => {
         ctx.translate(particle.x, particle.y);
         ctx.rotate(particle.rotation);
 
-        // Blur por profundidade - partículas distantes ficam desfocadas
-        const blurAmount = (1 - particle.depth) * 2;
-        if (blurAmount > 0.3) {
-          ctx.filter = `blur(${blurAmount}px)`;
-        }
-
         // Cor de fuligem baseada no tipo - paleta realista de fuligem e cinzas
         let fillStyle: string;
         const baseOpacity = particle.opacity;
@@ -439,8 +433,7 @@ const FloatingParticles = () => {
         const shapeIndex = Math.abs(Math.floor(particle.noiseOffsetX * 3) % 3);
         drawSootShape(particle, shapeIndex);
 
-        // Reset filter e shadow
-        ctx.filter = 'none';
+        // Reset shadow
         ctx.shadowColor = 'transparent';
         ctx.shadowBlur = 0;
         ctx.restore();
