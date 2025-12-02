@@ -140,7 +140,10 @@ const Community = () => {
           </p>
           
           {/* Partnership CTA */}
-          <div className={`pt-6 transition-all duration-700 delay-1200 ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+          <div className={`pt-6 space-y-4 transition-all duration-700 delay-1200 ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+            <p className="font-mono text-xs sm:text-sm text-muted-foreground/70">
+              Os vermes se unem no lixo da vida.
+            </p>
             <a
               href="https://forms.gle/W5eLQxFcyWpE4HQ1A"
               target="_blank"
@@ -148,7 +151,7 @@ const Community = () => {
               className="inline-flex items-center gap-2 px-6 py-3 border border-accent/60 hover:border-accent bg-background/40 hover:bg-accent/10 text-foreground hover:text-accent font-sans text-xs sm:text-sm tracking-widest uppercase transition-all duration-300 hover:shadow-lg hover:shadow-accent/20"
             >
               <ExternalLink className="h-4 w-4" />
-              Parcerias
+              Seja um parceiro do Verme
             </a>
           </div>
         </div>
