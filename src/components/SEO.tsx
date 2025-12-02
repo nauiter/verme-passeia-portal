@@ -11,8 +11,8 @@ interface SEOProps {
 }
 
 const SEO = ({ 
-  title = "O Verme Passeia | Manifesto Poético-Existencial",
-  description = "Um manifesto visual e poético sobre isolamento, lucidez e sobrevivência silenciosa em meio à ruína moderna. O Verme não procura luz. Ele procura sentido.",
+  title = "O Verme Passeia | Nauiter Master",
+  description = "Sem aplauso, sem destino, sem sentido... Ainda assim, o Verme continua a rastejar.",
   path = "/",
   noIndex = false,
   type = "website",
