@@ -29,12 +29,15 @@ const FooterNauiterMaster = () => {
           </div>
           
           <div className="space-y-2">
-            <p 
-              className="text-foreground transition-colors hover:text-accent"
+            <a 
+              href="https://nauitermaster.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground transition-colors hover:text-accent inline-block"
               style={{ fontSize: 'clamp(0.85rem, 1vw, 1rem)' }}
             >
               © 2025 Developer - Nauiter Master | Todos os direitos reservados
-            </p>
+            </a>
             <p 
               className="text-muted-foreground italic"
               style={{ fontSize: 'clamp(0.75rem, 0.9vw, 0.9rem)' }}
