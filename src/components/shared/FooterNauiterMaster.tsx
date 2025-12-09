@@ -30,7 +30,7 @@ const FooterNauiterMaster = () => {
           
           <div className="space-y-2">
             <a 
-              href="https://nauitermaster.com"
+              href="https://nauitermaster.com/pt"
               target="_blank"
               rel="noopener noreferrer"
               className="text-foreground transition-colors hover:text-accent inline-block"
